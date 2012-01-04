@@ -30,9 +30,13 @@ call pathogen#helptags()
 set helpfile=$VIMRUNTIME/doc/help.txt
 
 if has('vim_starting')
-    set runtimepath+=$HOME/.vim/neobundle.vim.git
-
-    call neobundle#rc(expand('~/.bundle'))
+    if has("win32") || has("win64")
+        set runtimepath+=$HOME/vimfiles/neobundle.vim.git
+        call neobundle#rc(expand('$HOME/vimfiles/bundle'))
+    else
+        set runtimepath+=$HOME/.vim/neobundle.vim.git
+        call neobundle#rc(expand('~/.bundle'))
+    endif
 endif
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'

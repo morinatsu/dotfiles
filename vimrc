@@ -46,8 +46,8 @@ NeoBundle 'git://github.com/vim-scripts/sudo.vim.git'
 NeoBundle 'git://github.com/nvie/vim-pep8.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle "git://github.com/thinca/vim-ref.git"
+NeoBundle "git://github.com/nathanaelkane/vim-indent-guides.git"
 
 filetype plugin on
 filetype indent on

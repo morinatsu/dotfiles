@@ -18,16 +18,12 @@ set laststatus=2
 set statusline=%F,%r,L=%l,C=%c
 set encoding=utf-8
 set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
+set nobackup
 syntax on
 
 " for neobundle
 set nocompatible
 filetype off
-
-" patogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-set helpfile=$VIMRUNTIME/doc/help.txt
 
 if has('vim_starting')
     if has("win32") || has("win64")

@@ -1,0 +1,31 @@
+#footnote
+snippet     #f
+abbr        [#fx] footnote
+    \ [#f${1}]_\ 
+    .. [#f{1}] ${2}
+
+#raw html
+snippet     html
+abbr        raw html
+prev_word   '^'
+    .. |hr| raw:: html
+    <hr>
+    |hr|
+
+#code block
+snippet     code
+abbr        code-block
+prev_word   '^'
+    .. code-block:: ${1:javascript}
+
+#doc link
+snippet     doc
+abbr        link to document
+    \ :doc:`${1}</${2}>`\ 
+
+#http link
+snippet     http
+abbr        link with http
+    \ `${1} <http://${2}.html>`_\ 
+
+

@@ -1,5 +1,5 @@
 #footnote
-snippet     #f
+snippet     footnote
 abbr        [#fx] footnote
     \ [#f${1}]_\ 
     .. [#f{1}] ${2}
@@ -9,7 +9,9 @@ snippet     html
 abbr        raw html
 prev_word   '^'
     .. |hr| raw:: html
-    <hr>
+
+       <hr>
+
     |hr|
 
 #code block
@@ -19,7 +21,7 @@ prev_word   '^'
     .. code-block:: ${1:javascript}
 
 #doc link
-snippet     doc
+snippet     :doc:
 abbr        link to document
     \ :doc:`${1}</${2}>`\ 
 

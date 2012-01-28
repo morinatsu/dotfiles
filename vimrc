@@ -16,9 +16,14 @@ set clipboard+=unnamed
 set number
 set laststatus=2
 set statusline=%F,%r,L=%l,C=%c
+if has("win32")
+    set termencoding=sjis
+endif
 set encoding=utf-8
 set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
 set nobackup
+set foldmethod=syntax
+set foldcolumn=4
 syntax on
 
 " for neobundle
@@ -27,6 +32,7 @@ filetype off
 
 if has('vim_starting')
     if has("win32") || has("win64")
+        set shellpipe=
         set runtimepath+=$HOME/vimfiles/neobundle.vim.git
         call neobundle#rc(expand('$HOME/vimfiles/bundle'))
     else
@@ -39,11 +45,10 @@ NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/vim-scripts/sudo.vim.git'
-NeoBundle 'git://github.com/nvie/vim-pep8.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
-NeoBundle "git://github.com/thinca/vim-ref.git"
 NeoBundle "git://github.com/nathanaelkane/vim-indent-guides.git"
+NeoBundle 'git://github.com/tpope/vim-surround.git'
 
 filetype plugin on
 filetype indent on

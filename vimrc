@@ -22,7 +22,6 @@ endif
 set encoding=utf-8
 set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
 set nobackup
-set foldmethod=syntax
 set foldcolumn=4
 syntax on
 

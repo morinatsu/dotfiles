@@ -41,6 +41,7 @@ if has('vim_starting')
 endif
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+NeoBundle 'git://github.com/vim-jp/vital.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/vim-scripts/sudo.vim.git'
@@ -98,7 +99,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " Use underbar completion.
 let g:neocomplcache_enable_underbar_completion = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_min_syntax_length = 10
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Plugin key-mappings.

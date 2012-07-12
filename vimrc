@@ -43,15 +43,16 @@ endif
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/vim-jp/vital.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/vim-jp/vimdoc-ja.git'
+"NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/vim-scripts/sudo.vim.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
+"NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
-NeoBundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
-NeoBundle 'git://github.com/tpope/vim-surround.git'
+"NeoBundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
+"NeoBundle 'git://github.com/tpope/vim-surround.git'
 NeoBundle 'git://github.com/Shougo/vimshell.git'
-NeoBundle 'git://github.com/mattn/benchvimrc-vim.git'
+"NeoBundle 'git://github.com/mattn/benchvimrc-vim.git'
 
 filetype plugin on
 filetype indent on
@@ -70,26 +71,26 @@ command! -bar -bang -nargs=? -complete=file GScouter
 \        echo Scouter(empty(<q-args>) ? $MYGVIMRC : expand(<q-args>), <bang>0)
 
 " for project.vim
-:let g:proj_flags = "imstc"
-:nmap <silent> <Leader>P <Plug>ToggleProject
-:nmap <silent> <Leader>p :Project<CR>
-autocmd BufAdd .vimprojects silent! %foldopen!
+":let g:proj_flags = "imstc"
+":nmap <silent> <Leader>P <Plug>ToggleProject
+":nmap <silent> <Leader>p :Project<CR>
+"autocmd BufAdd .vimprojects silent! %foldopen!
 
 " for vim-indent-guides
-let g:indent_guides_enable_on_vim_startop = 1
-let g:indent_guides_color_change_percent = 30
-let g:indent_guides_guide_size = 1
+"let g:indent_guides_enable_on_vim_startop = 1
+"let g:indent_guides_color_change_percent = 30
+"let g:indent_guides_guide_size = 1
 
 " """neocomplcache"""
 let g:neocomplcache_auto_completion_start_length = 4
 if has("win32") || has("win64")
-    let g:neocomplcache_snippets_dir = $HOME . '/vimfiles/snippets'
+"    let g:neocomplcache_snippets_dir = $HOME . '/vimfiles/snippets'
 else
-    let g:neocomplcache_snippets_dir = $HOME . '/.vim/snippets'
+"    let g:neocomplcache_snippets_dir = $HOME . '/.vim/snippets'
 endif
 
 "Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
+"let g:acp_enableAtStartup = 0
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
@@ -103,8 +104,8 @@ let g:neocomplcache_min_syntax_length = 10
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Plugin key-mappings.
-imap <C-CR>     <Plug>(neocomplcache_snippets_expand)
-smap <C-CR>     <Plug>(neocomplcache_snippets_expand)
+"imap <C-CR>     <Plug>(neocomplcache_snippets_expand)
+"smap <C-CR>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
@@ -120,7 +121,7 @@ inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 " For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+"if has('conceal')
+"  set conceallevel=2 concealcursor=i
+"endif
 

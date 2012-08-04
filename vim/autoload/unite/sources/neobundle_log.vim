@@ -1,7 +1,7 @@
 "=============================================================================
-" FILE: util.vim
-" AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 06 Jun 2012.
+" FILE: neobundle/log.vim
+" AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
+" Last Modified: 04 Nov 2011.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,19 +27,22 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:is_windows = has('win32') || has('win64')
+function! unite#sources#neobundle_log#define()"{{{
+  return s:source
+endfunction"}}}
 
-function! neobundle#util#substitute_path_separator(path)
-  return (s:is_windows) ? substitute(a:path, '\\', '/', 'g') : a:path
-endfunction
-function! neobundle#util#expand(path)
-  return neobundle#util#substitute_path_separator(
-        \ expand(escape(a:path, '*?[]"={}'), 1))
-endfunction
-function! neobundle#util#is_windows()
-  return s:is_windows
-endfunction
+let s:source = {
+      \ 'name' : 'neobundle/log',
+      \ 'description' : 'print previous neobundle install logs',
+      \ }
+
+function! s:source.gather_candidates(args, context)"{{{
+  return map(copy(neobundle#installer#get_log()), "{
+        \ 'word' : v:val,
+        \ }")
+endfunction"}}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
+" vim: foldmethod=marker

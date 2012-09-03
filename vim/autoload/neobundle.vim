@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neobundle.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 16 Feb 2012.
+" Last Modified: 23 Jun 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -22,31 +22,60 @@
 "     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
-" Version: 0.1, for Vim 7.2
+" Version: 2.0, for Vim 7.2
 "=============================================================================
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-command! -nargs=+ NeoBundle call neobundle#config#bundle(
-      \ substitute(<q-args>, '\s"[^\-:.%#=*].*$', '', ''))
+let g:neobundle_default_git_protocol =
+      \ get(g:, 'neobundle_default_git_protocol', 'git')
 
-command! -nargs=+ NeoExternalBundle
-      \ call neobundle#config#external_bundle(<args>)
+let s:neobundle_dir = get(
+      \ filter(split(globpath(&runtimepath, 'bundle', 1), '\n'),
+      \ 'isdirectory(v:val)'), 0, '~/.vim/bundle')
 
-command! -nargs=? -bang NeoBundleInstall
+command! -nargs=+ NeoBundle
+      \ call neobundle#config#bundle(
+      \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
+
+command! -nargs=+
+      \ -complete=customlist,neobundle#complete_lazy_bundles
+      \ NeoBundleLazy
+      \ call neobundle#config#lazy_bundle(
+      \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
+command! -nargs=+ NeoExternalBundle NeoBundleLazy <args>
+
+command! -nargs=* -bar
+      \ -complete=customlist,neobundle#complete_lazy_bundles
+      \ NeoBundleSource
+      \ call neobundle#config#source(<f-args>)
+
+command! -nargs=? -bang -bar
+      \ -complete=customlist,neobundle#complete_bundles
+      \ NeoBundleInstall
       \ call neobundle#installer#install('!' == '<bang>', <q-args>)
+command! -nargs=? -bar
+      \ -complete=customlist,neobundle#complete_bundles
+      \ NeoBundleUpdate
+      \ call neobundle#installer#install(1, <q-args>)
 
-command! -nargs=? -bang NeoBundleClean
+command! -nargs=? -bang -bar
+      \ -complete=customlist,neobundle#complete_deleted_bundles
+      \ NeoBundleClean
       \ call neobundle#installer#clean('!' == '<bang>', <q-args>)
 
-command! -nargs=? -bang NeoBundleList
+command! -nargs=? -bang -bar
+      \ NeoBundleList
       \ echo join(map(neobundle#config#get_neobundles(), 'v:val.name'), "\n")
 
-command! -nargs=0 NeoBundleDocs
+command! -nargs=0 -bar
+      \ NeoBundleDocs
       \ call neobundle#installer#helptags(neobundle#config#get_neobundles())
 
-command! -nargs=0 NeoBundleLog echo join(neobundle#installer#get_log(), "\n")
+command! -nargs=0 -bar
+      \ NeoBundleLog
+      \ echo join(neobundle#installer#get_log(), "\n")
 
 augroup neobundle
   autocmd!
@@ -54,14 +83,43 @@ augroup neobundle
 augroup END
 
 function! neobundle#rc(...)
+  if a:0 > 0
+    let s:neobundle_dir = a:1
+  endif
+
   let s:neobundle_dir =
         \ neobundle#util#substitute_path_separator(
-        \ neobundle#util#expand(get(a:000, 0, '~/.vim/bundle')))
+        \ neobundle#util#expand(s:neobundle_dir))
   call neobundle#config#init()
 endfunction
 
 function! neobundle#get_neobundle_dir()
   return s:neobundle_dir
+endfunction
+
+function! neobundle#source(bundle_names)
+  return call('neobundle#config#source', a:bundle_names)
+endfunction
+
+function! neobundle#complete_bundles(arglead, cmdline, cursorpos)
+  return filter(map(neobundle#config#get_neobundles(), 'v:val.name'),
+          \ 'stridx(v:val, a:arglead) == 0')
+endfunction
+
+function! neobundle#complete_lazy_bundles(arglead, cmdline, cursorpos)
+  return filter(map(filter(neobundle#config#get_neobundles(),
+        \ '!neobundle#config#is_sourced(v:val.name)'), 'v:val.name'),
+        \ 'stridx(v:val, a:arglead) == 0')
+endfunction
+
+function! neobundle#complete_deleted_bundles(arglead, cmdline, cursorpos)
+  let bundle_dirs = map(copy(neobundle#config#get_neobundles()), 'v:val.path')
+  let all_dirs = split(neobundle#util#substitute_path_separator(
+        \ globpath(neobundle#get_neobundle_dir(), '*')), "\n")
+  let x_dirs = filter(all_dirs, 'index(bundle_dirs, v:val) < 0')
+
+  return filter(map(x_dirs, "fnamemodify(v:val, ':t')"),
+        \ 'stridx(v:val, a:arglead) == 0')
 endfunction
 
 let &cpo = s:save_cpo

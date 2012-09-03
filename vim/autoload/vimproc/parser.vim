@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: parser.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 19 Sep 2011.
+" Last Modified: 18 Jul 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -29,8 +29,6 @@ let s:save_cpo = &cpo
 set cpo&vim
 " }}}
 
-let s:is_win = has('win32') || has('win64')
-
 function! vimproc#parser#system(cmdline, ...)"{{{
   let args = vimproc#parser#parse_statements(a:cmdline)
   for arg in args
@@ -48,9 +46,9 @@ function! vimproc#parser#system(cmdline, ...)"{{{
   endif
 endfunction"}}}
 function! vimproc#parser#system_bg(cmdline)"{{{
-  let cmdline = (a:cmdline =~ '&\s*$')? a:cmdline[: match(a:cmdline, '&\s*$') - 1] : a:cmdline
-  
-  if s:is_win
+  let cmdline = (a:cmdline =~ '&\s*$')? a:cmdline[:match(a:cmdline, '&\s*$') - 1] : a:cmdline
+
+  if vimproc#util#is_windows()
     silent execute '!start' cmdline
     return ''
   else
@@ -64,33 +62,8 @@ endfunction"}}}
 function! vimproc#parser#parse_pipe(statement)"{{{
   let commands = []
   for cmdline in vimproc#parser#split_pipe(a:statement)
-    " Expand block.
-    if cmdline =~ '{'
-      let cmdline = s:parse_block(cmdline)
-    endif
-
-    " Expand tilde.
-    if cmdline =~ '\~'
-      let cmdline = s:parse_tilde(cmdline)
-    endif
-
-    " Expand filename.
-    if cmdline =~ ' ='
-      let cmdline = s:parse_equal(cmdline)
-    endif
-
-    " Expand variables.
-    if cmdline =~ '\$'
-      let cmdline = s:parse_variables(cmdline)
-    endif
-
-    " Expand wildcard.
-    if cmdline =~ '[[*?]\|\\[()|]'
-      let cmdline = s:parse_wildcard(cmdline)
-    endif
-
     " Split args.
-    let args = vimproc#parser#split_args(cmdline)
+    let cmdline = s:parse_cmdline(cmdline)
 
     " Parse redirection.
     if cmdline =~ '[<>]'
@@ -100,14 +73,16 @@ function! vimproc#parser#parse_pipe(statement)"{{{
     endif
 
     for key in ['stdout', 'stderr']
-      if fd[key] != '' && fd[key] !~ '^>'
-        if fd[key] ==# '/dev/clip'
-          " Clear.
-          let @+ = ''
-        elseif fd[key] ==# '/dev/quickfix'
-          " Clear quickfix.
-          call setqflist([])
-        endif
+      if fd[key] == '' || fd[key] =~ '^>'
+        continue
+      endif
+
+      if fd[key] ==# '/dev/clip'
+        " Clear.
+        let @+ = ''
+      elseif fd[key] ==# '/dev/quickfix'
+        " Clear quickfix.
+        call setqflist([])
       endif
     endfor
 
@@ -118,6 +93,37 @@ function! vimproc#parser#parse_pipe(statement)"{{{
   endfor
 
   return commands
+endfunction"}}}
+function! s:parse_cmdline(cmdline)"{{{
+  let cmdline = a:cmdline
+
+  " Expand block.
+  if cmdline =~ '{'
+    let cmdline = s:parse_block(cmdline)
+  endif
+
+  " Expand tilde.
+  if cmdline =~ '\~'
+    let cmdline = s:parse_tilde(cmdline)
+  endif
+
+  " Expand filename.
+  if cmdline =~ ' ='
+    let cmdline = s:parse_equal(cmdline)
+  endif
+
+  " Expand variables.
+  if cmdline =~ '\$'
+    let cmdline = s:parse_variables(cmdline)
+  endif
+
+  " Expand wildcard.
+  if cmdline =~ '[[*?]\|\\[()|]'
+    let cmdline = s:parse_wildcard(cmdline)
+  endif
+
+  " Split args.
+  return cmdline
 endfunction"}}}
 function! vimproc#parser#parse_statements(script)"{{{
   if a:script =~ '^\s*:'
@@ -248,7 +254,7 @@ function! vimproc#parser#split_args(script)"{{{
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -322,7 +328,7 @@ function! vimproc#parser#split_args_through(script)"{{{
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -404,7 +410,7 @@ function! vimproc#parser#split_commands(script)"{{{
       let command .= script[i]
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -515,7 +521,7 @@ function! vimproc#parser#expand_wildcard(wildcard)"{{{
       elseif modifier[i] ==# '%'
         " Device.
 
-        if modifier[i:] =~# '^%[bc]'
+        if modifier[i :] =~# '^%[bc]'
           if modifier[i] ==# 'b'
             " Block device.
             let expr = 'getftype(v:val) ==# "bdev"'
@@ -554,6 +560,8 @@ function! s:parse_block(script)"{{{
       " Truncate script.
       let script = script[: -len(head)-1]
       let block = matchstr(a:script, '{\zs.*[^\\]\ze}', i)
+      let foot = join(vimproc#parser#split_args(s:parse_cmdline(
+            \ a:script[matchend(a:script, '{.*[^\\]}', i) :])))
       if block == ''
         throw 'Exception: Block is not found.'
       elseif block =~ '^\d\+\.\.\d\+$'
@@ -564,16 +572,16 @@ function! s:parse_block(script)"{{{
         let pattern = '%0' . zero . 'd'
         for b in range(start, end)
           " Concat.
-          let script .= head . printf(pattern, b) . ' '
+          let script .= head . printf(pattern, b) . foot . ' '
         endfor
       else
         " Normal block.
         for b in split(block, ',', 1)
           " Concat.
-          let script .= head . escape(b, ' ') . ' '
+          let script .= head . escape(b, ' ') . foot . ' '
         endfor
       endif
-      let i = matchend(a:script, '{.*[^\\]}', i)
+      return script
     else
       let [script, i] = s:skip_else(script, a:script, i)
     endif
@@ -592,6 +600,7 @@ function! s:parse_tilde(script)"{{{
       " Expand home directory.
       let script .= ' ' . escape(substitute($HOME, '\\', '/', 'g'), '\ ')
       let i += 2
+
     elseif i == 0 && a:script[i] == '~'
       " Tilde.
       " Expand home directory.
@@ -643,15 +652,20 @@ function! s:parse_variables(script)"{{{
         " Eval variables.
         if exists('b:vimshell')
           " For vimshell.
-          if match(a:script, '^$\l', i) >= 0
-            let script .= string(eval(printf("b:vimshell.variables['%s']", matchstr(a:script, '^$\zs\l\w*', i))))
-          elseif match(a:script, '^$$', i) >= 0
-            let script .= string(eval(printf("b:vimshell.system_variables['%s']", matchstr(a:script, '^$$\zs\h\w*', i))))
+          let script_head = a:script[i :]
+          if script_head =~ '^$\l'
+            let script .= string(eval(printf("b:vimshell.variables['%s']",
+                  \ matchstr(a:script, '^$\zs\l\w*', i))))
+          elseif script_head =~ '^$$'
+            let script .= string(eval(printf("b:vimshell.system_variables['%s']",
+                  \ matchstr(a:script, '^$$\zs\h\w*', i))))
           else
-            let script .= string(eval(matchstr(a:script, '^$\h\w*', i)))
+            let script .= vimproc#util#substitute_path_separator(
+                  \ eval(matchstr(a:script, '^$\h\w*', i)))
           endif
         else
-          let script .= string(eval(matchstr(a:script, '^$\h\w*', i)))
+          let script .= vimproc#util#substitute_path_separator(
+                \ eval(matchstr(a:script, '^$\h\w*', i)))
         endif
 
         let i = matchend(a:script, '^$$\?\h\w*', i)
@@ -691,14 +705,14 @@ function! s:parse_redirection(script)"{{{
       if a:script[i-2] == 1
         let fd.stdout = matchstr(a:script, '^\s*\zs\f*', i)
       else
-        let fd.stderr = matchstr(a:script, '^\s*\zs\f*', i)
+        let fd.stderr = matchstr(a:script, '^\s*\zs\(\f\+\|&\d\+\)', i)
         if fd.stderr ==# '&1'
           " Redirection to stdout.
           let fd.stderr = '/dev/stdout'
         endif
       endif
 
-      let i = matchend(a:script, '^\s*\zs\f*', i)
+      let i = matchend(a:script, '^\s*\zs\(\f\+\|&\d\+\)', i)
     elseif a:script[i] == '>'
       " Output redirection.
       if a:script[i :] =~ '^>&'
@@ -771,11 +785,21 @@ function! s:parse_double_quote(script, i)"{{{
     if script[i] == '"'
       " Quote end.
       return [arg, i+1]
+    elseif script[i] == '$'
+      " Eval variables.
+      let var = matchstr(join(script[i :], ''), '^$\h\w*')
+      if var != ''
+        let arg .= s:parse_variables(var)
+        let i += len(var)
+      else
+        let arg .= '$'
+        let i += 1
+      endif
     elseif script[i] == '\'
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -842,7 +866,7 @@ function! s:skip_single_quote(script, i)"{{{
   let i = a:i
 
   " a:script[i] is always "'" when this function is called
-  if a:script[i] != ''''
+  if i >= max || a:script[i] != ''''
     throw 'Exception: Quote ('') is not found.'
   endif
   let string .= a:script[i]
@@ -880,7 +904,7 @@ function! s:skip_double_quote(script, i)"{{{
   let i = a:i
 
   " a:script[i] is always '"' when this function is called
-  if a:script[i] != '"'
+  if i >= max || a:script[i] != '"'
     throw 'Exception: Quote (") is not found.'
   endif
   let string .= a:script[i]
@@ -890,8 +914,9 @@ function! s:skip_double_quote(script, i)"{{{
     if a:script[i] == '\'
           \ && i+1 < max && a:script[i+1] == '"'
       " Escape quote.
-      let string .= a:script[i] . a:script[i+1]
-      let i += 2
+      let string .= a:script[i]
+      let i += 1
+
     elseif a:script[i] == '"'
       break
     endif

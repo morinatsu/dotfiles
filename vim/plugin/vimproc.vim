@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: vimproc.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 09 Nov 2011.
+" Last Modified: 28 Mar 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -24,10 +24,10 @@
 " }}}
 "=============================================================================
 
-if v:version < 702
-  echoerr 'vimproc does not work this version of Vim "' . v:version . '".'
+if exists('g:loaded_vimproc')
   finish
-elseif exists('g:loaded_vimproc')
+elseif v:version < 702
+  echoerr 'vimproc does not work this version of Vim "' . v:version . '".'
   finish
 endif
 
@@ -36,18 +36,18 @@ let s:save_cpo = &cpo
 set cpo&vim
 " }}}
 
-let g:vimproc_shell_commands =
-      \ get(g:, 'vimproc_shell_commands', {
+let g:vimproc_popen2_commands =
+      \ get(g:, 'vimproc_popen2_commands', {
       \     'sh' : 1, 'bash' : 1, 'zsh' : 1, 'csh' : 1, 'tcsh' : 1,
       \     'tmux' : 1, 'screen' : 1, 'su' : 1,
-      \     'python' : 1, 'rhino' : 1, 'ipython' : 1,
+      \     'python' : 1, 'rhino' : 1, 'ipython' : 1, 'ipython3' : 1, 'yaourt' : 1,
       \ })
 let g:stdinencoding =
-      \ get(g:, 'stdinencoding', &termencoding)
+      \ get(g:, 'stdinencoding', 'char')
 let g:stdoutencoding =
-      \ get(g:, 'stdoutencoding', &termencoding)
+      \ get(g:, 'stdoutencoding', 'char')
 let g:stderrencoding =
-      \ get(g:, 'stderrencoding', &termencoding)
+      \ get(g:, 'stderrencoding', 'char')
 
 command! -nargs=+ -complete=shellcmd VimProcBang call s:bang(<q-args>)
 command! -nargs=+ -complete=shellcmd VimProcRead call s:read(<q-args>)

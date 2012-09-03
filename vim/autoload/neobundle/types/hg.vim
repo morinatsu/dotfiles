@@ -1,7 +1,7 @@
 "=============================================================================
-" FILE: util.vim
-" AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 06 Jun 2012.
+" FILE: hg.vim
+" AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
+" Last Modified: 25 Jul 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,19 +27,48 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:is_windows = has('win32') || has('win64')
+function! neobundle#types#hg#define()"{{{
+  return s:type
+endfunction"}}}
 
-function! neobundle#util#substitute_path_separator(path)
-  return (s:is_windows) ? substitute(a:path, '\\', '/', 'g') : a:path
-endfunction
-function! neobundle#util#expand(path)
-  return neobundle#util#substitute_path_separator(
-        \ expand(escape(a:path, '*?[]"={}'), 1))
-endfunction
-function! neobundle#util#is_windows()
-  return s:is_windows
-endfunction
+let s:type = {
+      \ 'name' : 'hg',
+      \ }
+
+function! s:type.detect(path)"{{{
+  let type = ''
+
+  if a:path =~? '[/.]hg[/.@]'
+          \ || (a:path =~# '\<https\?://bitbucket\.org/'
+          \ || a:path =~# '\<https://code\.google\.com/'
+          \    && a:path !~# '.git$')
+    let uri = a:path
+    let name = split(a:path, '/')[-1]
+
+    let type = 'hg'
+  endif
+
+  return type == '' ?  {} :
+        \ { 'name': name, 'uri': uri, 'type' : type }
+endfunction"}}}
+function! s:type.get_sync_command(bundle)"{{{
+  if !isdirectory(a:bundle.path)
+    let cmd = 'hg clone'
+    let cmd .= printf(' %s "%s"', a:bundle.uri, a:bundle.path)
+  else
+    let cmd = 'hg pull -u'
+  endif
+
+  return cmd
+endfunction"}}}
+function! s:type.get_revision_number_command(bundle)"{{{
+  return 'hg heads --quiet --rev default'
+endfunction"}}}
+function! s:type.get_revision_lock_command(bundle)"{{{
+  return 'hg up ' . a:bundle.rev
+endfunction"}}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
+" vim: foldmethod=marker

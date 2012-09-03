@@ -1,4 +1,3 @@
-set paste
 set expandtab
 set textwidth=0
 set tabstop=4

@@ -62,6 +62,7 @@ function! s:which(command, ...)
   \              !a:0                  ? split($PATH, s:path_separator) :
   \              type(a:1) == type([]) ? copy(a:1) :
   \                                      split(a:1, s:path_separator)
+  let pathlist = vimproc#util#uniq(pathlist)
 
   let pathext = s:path_extensions()
   if index(pathext, '.' . tolower(fnamemodify(a:command, ':e'))) != -1
@@ -80,7 +81,8 @@ function! s:which(command, ...)
       if executable(full)
         if s:is_case_tolerant()
           let full = glob(substitute(
-          \               toupper(full), '\u:\@!', '[\0\L\0]', 'g'), 1)
+          \               vimproc#util#substitute_path_separator(
+          \ toupper(full)), '\u:\@!', '[\0\L\0]', 'g'), 1)
         endif
         if full != ''
           return full
@@ -155,8 +157,6 @@ let s:is_case_tolerant = filereadable(expand('<sfile>:r') . '.VIM')
 function! s:is_case_tolerant()
   return s:is_case_tolerant
 endfunction
-
-
 
 let &cpo = s:save_cpo
 

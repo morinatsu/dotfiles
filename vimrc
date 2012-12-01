@@ -46,11 +46,12 @@ NeoBundle 'Shougo/vimproc', {
     \       'unix' : 'make -f make_unix.mak',
     \   }
     \ }
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'git://github.com/vim-jp/vital.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/vim-jp/vimdoc-ja.git'
 NeoBundle 'git://github.com/vim-scripts/sudo.vim.git'
-NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'git://github.com/thinca/vim-guicolorscheme.git'
 
@@ -98,12 +99,6 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 10
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-" Plugin key-mappings.
-
-" Recommended key-mappings.
-
-" For snippet_complete marker.
-"if has('conceal')
-"  set conceallevel=2 concealcursor=i
-"endif
-
+" for snippets
+imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <C-k> <Plug>(neocomplcache_snippets_expand)

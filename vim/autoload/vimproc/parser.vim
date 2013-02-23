@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: parser.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 24 Oct 2012.
+" Last Modified: 16 Feb 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -30,7 +30,7 @@ set cpo&vim
 " }}}
 
 " For vimshell parser.
-function! vimproc#parser#parse_pipe(statement)"{{{
+function! vimproc#parser#parse_pipe(statement) "{{{
   let commands = []
   for cmdline in vimproc#parser#split_pipe(a:statement)
     " Split args.
@@ -65,7 +65,7 @@ function! vimproc#parser#parse_pipe(statement)"{{{
 
   return commands
 endfunction"}}}
-function! s:parse_cmdline(cmdline)"{{{
+function! s:parse_cmdline(cmdline) "{{{
   let cmdline = a:cmdline
 
   " Expand block.
@@ -93,10 +93,9 @@ function! s:parse_cmdline(cmdline)"{{{
     let cmdline = s:parse_wildcard(cmdline)
   endif
 
-  " Split args.
-  return cmdline
+  return s:parse_tilde(cmdline)
 endfunction"}}}
-function! vimproc#parser#parse_statements(script)"{{{
+function! vimproc#parser#parse_statements(script) "{{{
   if type(a:script) == type('')  && a:script =~ '^\s*:'
     return [ { 'statement' : a:script, 'condition' : 'always' } ]
   endif
@@ -147,7 +146,7 @@ function! vimproc#parser#parse_statements(script)"{{{
 
         let i += 1
       endif
-    elseif l:script[i] == "'"
+    elseif script[i] == "'"
       " Single quote.
       let [string, i] = s:skip_single_quote(script, i)
       let statement .= string
@@ -188,11 +187,11 @@ function! vimproc#parser#parse_statements(script)"{{{
   return statements
 endfunction"}}}
 
-function! vimproc#parser#split_statements(script)"{{{
+function! vimproc#parser#split_statements(script) "{{{
   return map(vimproc#parser#parse_statements(a:script),
         \ 'v:val.statement')
 endfunction"}}}
-function! vimproc#parser#split_args(script)"{{{
+function! vimproc#parser#split_args(script) "{{{
   let script = type(a:script) == type([]) ?
         \ a:script : split(a:script, '\zs')
   let max = len(script)
@@ -254,20 +253,9 @@ function! vimproc#parser#split_args(script)"{{{
     call add(args, arg)
   endif
 
-  " Substitute modifier.
-  let ret = []
-  for arg in args
-    if arg =~ '\%(:[p8~.htre]\)\+$'
-      let modify = matchstr(arg, '\%(:[p8~.htre]\)\+$')
-      let arg = fnamemodify(arg[: -len(modify)-1], modify)
-    endif
-
-    call add(ret, arg)
-  endfor
-
-  return ret
+  return args
 endfunction"}}}
-function! vimproc#parser#split_args_through(script)"{{{
+function! vimproc#parser#split_args_through(script) "{{{
   let script = type(a:script) == type([]) ?
         \ a:script : split(a:script, '\zs')
   let max = len(script)
@@ -327,7 +315,7 @@ function! vimproc#parser#split_args_through(script)"{{{
 
   return args
 endfunction"}}}
-function! vimproc#parser#split_pipe(script)"{{{
+function! vimproc#parser#split_pipe(script) "{{{
   let script = type(a:script) == type([]) ?
         \ a:script : split(a:script, '\zs')
   let max = len(script)
@@ -369,7 +357,7 @@ function! vimproc#parser#split_pipe(script)"{{{
 
   return commands
 endfunction"}}}
-function! vimproc#parser#split_commands(script)"{{{
+function! vimproc#parser#split_commands(script) "{{{
   let script = type(a:script) == type([]) ?
         \ a:script : split(a:script, '\zs')
   let max = len(script)
@@ -408,13 +396,13 @@ function! vimproc#parser#split_commands(script)"{{{
 
   return commands
 endfunction"}}}
-function! vimproc#parser#expand_wildcard(wildcard)"{{{
+function! vimproc#parser#expand_wildcard(wildcard) "{{{
   " Check wildcard.
   let i = 0
   let max = len(a:wildcard)
   let script = ''
   let found = 0
-  while i < l:max
+  while i < max
     if a:wildcard[i] == '*' || a:wildcard[i] == '?' || a:wildcard[i] == '['
       let found = 1
       break
@@ -520,7 +508,7 @@ function! vimproc#parser#expand_wildcard(wildcard)"{{{
 endfunction"}}}
 
 " Parse helper.
-function! s:parse_block(script)"{{{
+function! s:parse_block(script) "{{{
   let script = ''
 
   let i = 0
@@ -561,7 +549,7 @@ function! s:parse_block(script)"{{{
 
   return script
 endfunction"}}}
-function! s:parse_tilde(script)"{{{
+function! s:parse_tilde(script) "{{{
   let script = ''
 
   let i = 0
@@ -585,7 +573,7 @@ function! s:parse_tilde(script)"{{{
 
   return script
 endfunction"}}}
-function! s:parse_equal(script)"{{{
+function! s:parse_equal(script) "{{{
   let script = ''
 
   let i = 0
@@ -613,27 +601,28 @@ function! s:parse_equal(script)"{{{
 
   return script
 endfunction"}}}
-function! s:parse_variables(script)"{{{
+function! s:parse_variables(script) "{{{
   let script = ''
 
   let i = 0
   let max = len(a:script)
   try
     while i < max
-      if a:script[i] == '$'
+      if a:script[i] == '$' && a:script[i :] =~ '^$$\?\h'
         " Eval variables.
+        let variable_name = matchstr(a:script, '^$$\?\zs\h\w*', i)
         if exists('b:vimshell')
           " For vimshell.
           let script_head = a:script[i :]
-          if script_head =~ '^$\l'
-            let script .= string(eval(printf("b:vimshell.variables['%s']",
-                  \ matchstr(a:script, '^$\zs\l\w*', i))))
-          elseif script_head =~ '^$$'
-            let script .= string(eval(printf("b:vimshell.system_variables['%s']",
-                  \ matchstr(a:script, '^$$\zs\h\w*', i))))
-          else
+          if script_head =~ '^$\l' &&
+                \ has_key(b:vimshell.variables, variable_name)
+            let script .= b:vimshell.variables[variable_name]
+          elseif script_head =~ '^\$\$' &&
+                \ has_key(b:vimshell.system_variables, variable_name)
+            let script .= b:vimshell.system_variables[variable_name]
+          elseif script_head =~ '^$\h'
             let script .= vimproc#util#substitute_path_separator(
-                  \ eval(matchstr(a:script, '^$\h\w*', i)))
+                  \ eval(variable_name))
           endif
         else
           let script .= vimproc#util#substitute_path_separator(
@@ -652,7 +641,7 @@ function! s:parse_variables(script)"{{{
 
   return script
 endfunction"}}}
-function! s:parse_wildcard(script)"{{{
+function! s:parse_wildcard(script) "{{{
   let script = ''
   for arg in vimproc#parser#split_args_through(a:script)
     let script .= join(vimproc#parser#expand_wildcard(arg)) . ' '
@@ -660,7 +649,7 @@ function! s:parse_wildcard(script)"{{{
 
   return script
 endfunction"}}}
-function! s:parse_redirection(script)"{{{
+function! s:parse_redirection(script) "{{{
   let script = ''
   let fd = { 'stdin' : '', 'stdout' : '', 'stderr' : '' }
 
@@ -703,14 +692,14 @@ function! s:parse_redirection(script)"{{{
 
       let i = matchend(a:script, '^\s*\zs\f*', i)
     else
-      let [l:script, i] = s:skip_else(l:script, a:script, i)
+      let [script, i] = s:skip_else(script, a:script, i)
     endif
   endwhile
 
   return [fd, script]
 endfunction"}}}
 
-function! s:parse_single_quote(script, i)"{{{
+function! s:parse_single_quote(script, i) "{{{
   if a:script[a:i] != "'"
     return ['', a:i]
   endif
@@ -736,7 +725,7 @@ function! s:parse_single_quote(script, i)"{{{
 
   throw 'Exception: Quote ('') is not found.'
 endfunction"}}}
-function! s:parse_double_quote(script, i)"{{{
+function! s:parse_double_quote(script, i) "{{{
   if a:script[a:i] != '"'
     return ['', a:i]
   endif
@@ -767,6 +756,10 @@ function! s:parse_double_quote(script, i)"{{{
         let arg .= '$'
         let i += 1
       endif
+    elseif script[i] == '`'
+      " Backquote.
+      let [arg_quote, i] = s:parse_back_quote(script, i)
+      let arg .= arg_quote
     elseif script[i] == '\'
       " Escape.
       let i += 1
@@ -793,7 +786,7 @@ function! s:parse_double_quote(script, i)"{{{
 
   throw 'Exception: Quote (") is not found.'
 endfunction"}}}
-function! s:parse_back_quote(script, i)"{{{
+function! s:parse_back_quote(script, i) "{{{
   if a:script[a:i] != '`'
     return ['', a:i]
   endif
@@ -832,7 +825,7 @@ function! s:parse_back_quote(script, i)"{{{
 endfunction"}}}
 
 " Skip helper.
-function! s:skip_single_quote(script, i)"{{{
+function! s:skip_single_quote(script, i) "{{{
   let max = len(a:script)
   let string = ''
   let i = a:i
@@ -870,7 +863,7 @@ function! s:skip_single_quote(script, i)"{{{
 
   return [string, i]
 endfunction"}}}
-function! s:skip_double_quote(script, i)"{{{
+function! s:skip_double_quote(script, i) "{{{
   let max = len(a:script)
   let string = ''
   let i = a:i
@@ -908,7 +901,7 @@ function! s:skip_double_quote(script, i)"{{{
 
   return [string, i]
 endfunction"}}}
-function! s:skip_back_quote(script, i)"{{{
+function! s:skip_back_quote(script, i) "{{{
   let max = len(a:script)
   let string = ''
   let i = a:i
@@ -936,7 +929,7 @@ function! s:skip_back_quote(script, i)"{{{
 
   return [string, i]
 endfunction"}}}
-function! s:skip_else(args, script, i)"{{{
+function! s:skip_else(args, script, i) "{{{
   if a:script[a:i] == "'"
     " Single quote.
     let [string, i] = s:skip_single_quote(a:script, a:i)

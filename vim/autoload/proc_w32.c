@@ -26,6 +26,7 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <io.h>
 
 /* For GetConsoleWindow() for Windows 2000 or later. */
 #ifndef WINVER
@@ -92,10 +93,13 @@ EXPORT const char *vp_socket_close(char *args);/* [] (socket) */
 EXPORT const char *vp_socket_read(char *args); /* [hd, eof] (socket, nr, timeout) */
 EXPORT const char *vp_socket_write(char *args);/* [nleft] (socket, hd, timeout) */
 
+EXPORT const char *vp_host_exists(char *args); /* [int] (host) */
+
 EXPORT const char *vp_decode(char *args);      /* [decoded_str] (encode_str) */
 
 EXPORT const char *vp_open(char *args);      /* [] (path) */
 EXPORT const char *vp_readdir(char *args);  /* [files] (dirname) */
+
 
 EXPORT const char * vp_delete_trash(char *args);  /* [filename] */
 
@@ -119,6 +123,7 @@ lasterror()
 #define close _close
 #define read _read
 #define write _write
+#define lseek _lseek
 
 #define CSI_WndCols(csi) ((csi)->srWindow.Right - (csi)->srWindow.Left +1)
 #define CSI_WndRows(csi) ((csi)->srWindow.Bottom - (csi)->srWindow.Top +1)
@@ -160,7 +165,7 @@ vp_dlclose(char *args)
 const char *
 vp_dlversion(char *args)
 {
-    vp_stack_push_num(&_result, "%2d%02d", 7, 0);
+    vp_stack_push_num(&_result, "%2d%02d", 7, 1);
     return vp_stack_return(&_result);
 }
 
@@ -345,7 +350,7 @@ vp_file_write(char *args)
             /* timeout */
             break;
         }
-        n = write(fd, buf + nleft, size - nleft);
+        n = write(fd, buf + nleft, (unsigned int)(size - nleft));
         if (n == -1) {
             return vp_stack_return_error(&_result, "write() error: %s",
                     strerror(errno));
@@ -367,9 +372,9 @@ vp_pipe_open(char *args)
     vp_stack_t stack;
     int npipe, hstdin, hstderr, hstdout;
     char *cmdline;
-    HANDLE hInputWrite, hInputRead;
-    HANDLE hOutputWrite, hOutputRead;
-    HANDLE hErrorWrite, hErrorRead;
+    HANDLE hInputWrite = INVALID_HANDLE_VALUE, hInputRead;
+    HANDLE hOutputWrite, hOutputRead = INVALID_HANDLE_VALUE;
+    HANDLE hErrorWrite, hErrorRead = INVALID_HANDLE_VALUE;
     SECURITY_ATTRIBUTES sa;
     PROCESS_INFORMATION pi;
     STARTUPINFO si;
@@ -730,7 +735,7 @@ vp_socket_open(char *args)
     }
 
     if (sscanf(port, "%d%n", &port_nr, &n) == 1 && port[n] == '\0') {
-        nport = htons(port_nr);
+        nport = htons((u_short)port_nr);
     } else {
         servent = getservbyname(port, NULL);
         if (servent == NULL)
@@ -739,7 +744,7 @@ vp_socket_open(char *args)
         nport = servent->s_port;
     }
 
-    sock = socket(PF_INET, SOCK_STREAM, 0);
+    sock = (int)socket(PF_INET, SOCK_STREAM, 0);
     hostent = gethostbyname(host);
     sockaddr.sin_family = AF_INET;
     sockaddr.sin_port = nport;
@@ -862,7 +867,7 @@ vp_socket_write(char *args)
             /* timeout */
             break;
         }
-        n = send(sock, buf + nleft, size - nleft, 0);
+        n = send(sock, buf + nleft, (int)(size - nleft), 0);
         if (n == -1)
             return vp_stack_return_error(&_result, "send() error: %s",
                     strerror(errno));
@@ -873,6 +878,32 @@ vp_socket_write(char *args)
     vp_stack_push_num(&_result, "%u", nleft);
     return vp_stack_return(&_result);
 }
+
+
+/*
+ * Added by Richard Emberson
+ * Check to see if a host exists.
+ */
+const char *
+vp_host_exists(char *args)
+{
+    vp_stack_t stack;
+    char *host;
+    struct hostent *hostent;
+
+    VP_RETURN_IF_FAIL(vp_stack_from_args(&stack, args));
+    VP_RETURN_IF_FAIL(vp_stack_pop_str(&stack, &host));
+
+    hostent = gethostbyname(host);
+    if (hostent) {
+        vp_stack_push_num(&_result, "%d", 1);
+    } else {
+        vp_stack_push_num(&_result, "%d", 0);
+    }
+
+    return vp_stack_return(&_result);
+}
+
 
 /* Referenced from */
 /* http://www.syuhitu.org/other/dir.html */
@@ -1017,7 +1048,7 @@ vp_decode(char *args)
             buf[bi] = '@';
             bi++;
         } else {
-            buf[bi] = num;
+            buf[bi] = (char)num;
             bi++;
         }
         num = 0;

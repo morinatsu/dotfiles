@@ -32,13 +32,17 @@ if has('vim_starting')
     if has("win32") || has("win64")
         set shellpipe=
         set runtimepath+=$HOME/vimfiles/bundle/neobundle.vim/
-        call neobundle#rc(expand('$HOME/vimfiles/bundle'))
     else
-        set runtimepath+=$HOME/.vim/neobundle.vim.git
-        call neobundle#rc(expand('~/.bundle'))
+        set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
 endif
+if has("win32") || has("win64")
+    call neobundle#rc(expand('$HOME/vimfiles/bundle'))
+else
+    call neobundle#rc(expand('~/.vim/bundle/'))
+endif
 
+NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc', {
     \ 'build' : {
     \       'windows' : 'make -f make_mingw64.mak',
@@ -58,11 +62,7 @@ filetype plugin on
 filetype indent on
 
 " Installation check
-if neobundle#exists_not_installed_bundles()
-    echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-    echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
+NeoBundleCheck
 
 function! Scouter(file, ...)
   let pat = '^\s*$\|^\s*"'

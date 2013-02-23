@@ -39,7 +39,6 @@ if has('vim_starting')
     endif
 endif
 
-NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc', {
     \ 'build' : {
     \       'windows' : 'make -f make_mingw64.mak',

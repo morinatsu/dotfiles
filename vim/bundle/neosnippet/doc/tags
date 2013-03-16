@@ -26,6 +26,7 @@ neocomplcache#sources#snippets_complete#force_expandable()	neosnippet.txt	/*neoc
 neocomplcache#sources#snippets_complete#get_snippets_dir()	neosnippet.txt	/*neocomplcache#sources#snippets_complete#get_snippets_dir()*
 neocomplcache#sources#snippets_complete#jumpable()	neosnippet.txt	/*neocomplcache#sources#snippets_complete#jumpable()*
 neosnippet#expandable()	neosnippet.txt	/*neosnippet#expandable()*
+neosnippet#expandable_or_jumpable()	neosnippet.txt	/*neosnippet#expandable_or_jumpable()*
 neosnippet#get_snippets_directory()	neosnippet.txt	/*neosnippet#get_snippets_directory()*
 neosnippet#jumpable()	neosnippet.txt	/*neosnippet#jumpable()*
 neosnippet-changelog	neosnippet.txt	/*neosnippet-changelog*

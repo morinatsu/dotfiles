@@ -23,6 +23,7 @@ set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
 set nobackup
 set foldcolumn=4
 syntax on
+autocmd FileType text setlocal textwidth=0
 
 " for neobundle
 set nocompatible

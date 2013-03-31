@@ -1,4 +1,4 @@
-*syntax.txt*	For Vim バージョン 7.3.  Last change: 2012 Jul 16
+*syntax.txt*	For Vim バージョン 7.3.  Last change: 2013 Jan 30
 
 
 		VIMリファレンスマニュアル    by Bram Moolenaar
@@ -38,7 +38,7 @@ Vimは全ての端末で構文ハイライトをサポートしている。し�
 16. ウィンドウローカル構文		|:ownsyntax|
 17. カラー対応xterm			|xterm-color|
 
-{Vi にはこれらのコマンドは存在しない}
+{Vi にはこれらのコマンドはない}
 
 コンパイル時に|+syntax|機能を無効にした場合には構文ハイライトは利用することは
 できない。
@@ -515,8 +515,8 @@ Note -s フラグは .vimrc とプラグインの読み込みを抑制する。�
 1 なら、Vim の動作と同じように折り畳みを開いたり閉じたりするための、javascript
 が生成される。
 
-この変数を 1 に設定すると、|g:html_use_css| の設定にかかわらず、2html.vim は常
-に CSS を使うようになる。
+この変数を 1 に設定すると、|g:html_use_css| の設定に関わらず、2html.vim は常に
+CSS を使うようになる。
 
 この変数は |g:html_ignore_folding| が設定されているときは無視される。
 >
@@ -1064,6 +1064,10 @@ DocBookファイルには2つの種類: SGMLとXMLがある。どちらのタイ
 または: >
 	:set filetype=docbkxml
 
+DocBook のバージョンを指定できる: >
+	:let docbk_ver = 3
+設定しない場合は 4 が使われる。
+
 
 DOSバッチファイル			*dosbatch.vim* *ft-dosbatch-syntax*
 
@@ -1174,7 +1178,7 @@ eiffel_strictを設定すると "Current", "Void", "Result", "Precursor" そし�
 
 eiffel_pedanticを設定すると、Eiffelのスタイルガイドラインを相当に厳格に強制す
 る。(キーワードを大文字で書く時代遅れの方法と同様に、大小文字を任意にミックス
-したようなものが補足される)
+したようなものが捕捉される)
 
 "Current", "Void", "Result" そして "Precursor" の小文字版を使用するには、大小
 文字を区別するハイライト方法を無効化する代わりに: >
@@ -1517,8 +1521,8 @@ syntax.vimを参照すること)。
     - htmlUnderline
     - htmlUnderlineItalic
     - htmlItalic
-    - htmlTitle for titles
-    - htmlH1 - htmlH6 for headings
+    - htmlTitle タイトル用
+    - htmlH1 - htmlH6 見出し用
 
 この再定義が機能するためには最後の2つを除くすべてを再定義しなければならない。
 最後の2つ、htmlTitleとhtmlH[1-6]は任意である。そして次の変数をvimrcで設定しな
@@ -2390,6 +2394,12 @@ readlineライブラリは主としてBASHシェルで使われ、BASHはかな�
 トするようになる。
 
 
+RESTRUCTURED TEXT			*rst.vim* *ft-rst-syntax*
+
+コードブロックで有効にしたい構文定義を定義できる。
+	let rst_syntax_code_list = ['vim', 'lisp', ...]
+
+
 REXX						*rexx.vim* *ft-rexx-syntax*
 
 上方向にスクロールしているときにハイライトがおかしくなり、それがCTRL-Lで再描画
@@ -2543,7 +2553,7 @@ SGMLファイル中のタグをハイライトする方法は以下のように�
     - sgmlBoldItalic
     - sgmlUnderline
     - sgmlItalic
-    - sgmlLink for links
+    - sgmlLink リンク用
 
 この再定義を機能させるにはこれらすべてを再定義し、以下の変数をvimrc中で定義し
 なければならない(初期化の際にファイルが読み込まれる順序のため) >
@@ -4390,8 +4400,8 @@ LineNr		":number" と ":#" コマンドの行番号。'number' オプション�
 		'relativenumber' オプションが設定されているときにはその表示に
 		も使われる。
 							*hl-CursorLineNr*
-CursorLineNr	LineNr と同じだが 'cursorline' が設定されているときに現在行に
-		使われる。
+CursorLineNr	LineNr と同じだが 'cursorline' か 'relativenumber' が設定され
+		ているときに現在行に使われる。
 							*hl-MatchParen*
 MatchParen	カーソル下の文字、または直後の文字が括弧であるとき、その文字と
 		対応する括弧に使われる。|pi_paren.txt|

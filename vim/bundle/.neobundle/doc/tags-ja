@@ -3699,8 +3699,10 @@ E36	windows.jax	/*E36*
 E360	various.jax	/*E360*
 E362	term.jax	/*E362*
 E363	options.jax	/*E363*
+E364	eval.jax	/*E364*
 E365	print.jax	/*E365*
 E367	autocmd.jax	/*E367*
+E368	eval.jax	/*E368*
 E369	pattern.jax	/*E369*
 E37	message.jax	/*E37*
 E370	various.jax	/*E370*
@@ -4233,6 +4235,7 @@ E859	eval.jax	/*E859*
 E86	windows.jax	/*E86*
 E860	eval.jax	/*E860*
 E861	eval.jax	/*E861*
+E862	eval.jax	/*E862*
 E88	windows.jax	/*E88*
 E89	message.jax	/*E89*
 E90	message.jax	/*E90*
@@ -5638,6 +5641,7 @@ ft-quake-syntax	syntax.jax	/*ft-quake-syntax*
 ft-r-indent	indent.jax	/*ft-r-indent*
 ft-readline-syntax	syntax.jax	/*ft-readline-syntax*
 ft-rexx-syntax	syntax.jax	/*ft-rexx-syntax*
+ft-rst-syntax	syntax.jax	/*ft-rst-syntax*
 ft-ruby-omni	insert.jax	/*ft-ruby-omni*
 ft-ruby-syntax	syntax.jax	/*ft-ruby-syntax*
 ft-scheme-syntax	syntax.jax	/*ft-scheme-syntax*
@@ -5778,6 +5782,7 @@ g:netrw_cygwin	pi_netrw.jax	/*g:netrw_cygwin*
 g:netrw_dav_cmd	pi_netrw.jax	/*g:netrw_dav_cmd*
 g:netrw_decompress	pi_netrw.jax	/*g:netrw_decompress*
 g:netrw_dirhistmax	pi_netrw.jax	/*g:netrw_dirhistmax*
+g:netrw_dynamic_maxfilenamelen	pi_netrw.jax	/*g:netrw_dynamic_maxfilenamelen*
 g:netrw_errorlvl	pi_netrw.jax	/*g:netrw_errorlvl*
 g:netrw_fastbrowse	pi_netrw.jax	/*g:netrw_fastbrowse*
 g:netrw_fetch_cmd	pi_netrw.jax	/*g:netrw_fetch_cmd*
@@ -6064,6 +6069,7 @@ gui_w16.txt	gui_w16.jax	/*gui_w16.txt*
 gui_w32.txt	gui_w32.jax	/*gui_w32.txt*
 gui_x11.txt	gui_x11.jax	/*gui_x11.txt*
 guifontwide_gtk2	options.jax	/*guifontwide_gtk2*
+guifontwide_win_mbyte	options.jax	/*guifontwide_win_mbyte*
 guioptions_a	options.jax	/*guioptions_a*
 guu	change.jax	/*guu*
 gv	visual.jax	/*gv*
@@ -6580,6 +6586,7 @@ mapmode-s	map.jax	/*mapmode-s*
 mapmode-v	map.jax	/*mapmode-v*
 mapmode-x	map.jax	/*mapmode-x*
 mapping	map.jax	/*mapping*
+mapping-functions	usr_41.jax	/*mapping-functions*
 mark	motion.jax	/*mark*
 mark-functions	usr_41.jax	/*mark-functions*
 mark-motions	motion.jax	/*mark-motions*
@@ -6688,6 +6695,7 @@ mzscheme-buffer	if_mzsch.jax	/*mzscheme-buffer*
 mzscheme-commands	if_mzsch.jax	/*mzscheme-commands*
 mzscheme-dynamic	if_mzsch.jax	/*mzscheme-dynamic*
 mzscheme-examples	if_mzsch.jax	/*mzscheme-examples*
+mzscheme-funcref	if_mzsch.jax	/*mzscheme-funcref*
 mzscheme-mzeval	if_mzsch.jax	/*mzscheme-mzeval*
 mzscheme-sandbox	if_mzsch.jax	/*mzscheme-sandbox*
 mzscheme-threads	if_mzsch.jax	/*mzscheme-threads*
@@ -6734,6 +6742,7 @@ netrw-R	pi_netrw.jax	/*netrw-R*
 netrw-S	pi_netrw.jax	/*netrw-S*
 netrw-T	pi_netrw.jax	/*netrw-T*
 netrw-U	pi_netrw.jax	/*netrw-U*
+netrw-X	pi_netrw.jax	/*netrw-X*
 netrw-a	pi_netrw.jax	/*netrw-a*
 netrw-activate	pi_netrw.jax	/*netrw-activate*
 netrw-bookmark	pi_netrw.jax	/*netrw-bookmark*
@@ -7276,6 +7285,7 @@ rileft.txt	rileft.jax	/*rileft.txt*
 riscos	os_risc.jax	/*riscos*
 rot13	change.jax	/*rot13*
 round()	eval.jax	/*round()*
+rst.vim	syntax.jax	/*rst.vim*
 rsync	pi_netrw.jax	/*rsync*
 ruby	if_ruby.jax	/*ruby*
 ruby-buffer	if_ruby.jax	/*ruby-buffer*
@@ -7327,6 +7337,8 @@ save-file	editing.jax	/*save-file*
 save-settings	starting.jax	/*save-settings*
 scheme.vim	syntax.jax	/*scheme.vim*
 scp	pi_netrw.jax	/*scp*
+screencol()	eval.jax	/*screencol()*
+screenrow()	eval.jax	/*screenrow()*
 script	usr_41.jax	/*script*
 script-here	if_perl.jax	/*script-here*
 script-local	map.jax	/*script-local*
@@ -7395,11 +7407,13 @@ sgr-mouse	options.jax	/*sgr-mouse*
 sh-awk	syntax.jax	/*sh-awk*
 sh-embed	syntax.jax	/*sh-embed*
 sh.vim	syntax.jax	/*sh.vim*
+sha256()	eval.jax	/*sha256()*
 shell-window	tips.jax	/*shell-window*
 shell_error-variable	eval.jax	/*shell_error-variable*
 shellescape()	eval.jax	/*shellescape()*
 shift	intro.jax	/*shift*
 shift-left-right	change.jax	/*shift-left-right*
+shiftwidth()	eval.jax	/*shiftwidth()*
 short-name-changed	version4.jax	/*short-name-changed*
 showing-menus	gui.jax	/*showing-menus*
 sign-commands	sign.jax	/*sign-commands*
@@ -8357,6 +8371,7 @@ white-space	pattern.jax	/*white-space*
 whitespace	pattern.jax	/*whitespace*
 wildcard	editing.jax	/*wildcard*
 wildcards	editing.jax	/*wildcards*
+wildmenumode()	eval.jax	/*wildmenumode()*
 win16-!start	gui_w16.jax	/*win16-!start*
 win16-clipboard	gui_w16.jax	/*win16-clipboard*
 win16-colors	gui_w16.jax	/*win16-colors*

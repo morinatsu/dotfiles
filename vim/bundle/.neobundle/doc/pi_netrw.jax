@@ -1,4 +1,4 @@
-*pi_netrw.txt*  For Vim バージョン 7.3.  Last change: 2012 Apr 05
+*pi_netrw.txt*  For Vim バージョン 7.3.  Last change: 2012 Oct 25
 
 	    -----------------------------------------------------
 	    NETRW REFERENCE MANUAL    by Charles E. Campbell, Jr.
@@ -108,7 +108,7 @@ Copyright: Copyright (C) 1999-2012 Charles E Campbell, Jr    *netrw-copyright*
 ==============================================================================
 2. Netrw の準備						*netrw-start* {{{1
 
-Netrw を使うとファイルの読み込み、書き込み、ネットワークを透したブラウジング、
+Netrw を使うとファイルの読み込み、書き込み、ネットワークを通したブラウジング、
 ローカルファイルのブラウジングが簡単になります。最初に、プラグインが有効になっ
 ているかどうかを確認してください。最低限、次のような設定が<.vimrc>に必要です:
 (なっていない場合は |netrw-activate| を参照してください) >
@@ -209,7 +209,7 @@ scp や ftp 以外のプロトコルもサポートされています。次の�
 	は各コマンドに合わせて次のようになります: >
 
 		    elinks : "-source >"
-		    links  : "-source >"
+		    links  : "-dump >"
 		    curl   : "-o"
 		    wget   : "-q -O"
 		    fetch  : "-o"
@@ -1046,6 +1046,7 @@ QUICK HELP						*netrw-quickhelp* {{{2
 	   v	カーソル位置のファイル/ディレクトリを                |netrw-v|
 		新しいウィンドウで開く。垂直分割。
 	   x	関連付けられたプログラムでファイルを表示する         |netrw-x|
+	   X	カーソル位置のファイルを |system()| で実行する         |netrw-X|
 
 	   %	表示しているディレクトリで新しいファイルを開く       |netrw-%|
 
@@ -1536,16 +1537,24 @@ For Unix: >
 関連設定: |g:netrw_sort_sequence| |g:netrw_sort_options|
 
 
+カーソル位置のファイルを system() で実行する			*netrw-X*
+
+実行ファイルの上で X を押すと引数を入力するためのプロンプトが表示されます。そ
+こで [return] を押すと、netrw はそのコマンドと引数で |system()| を実行します。
+結果は |:echomsg| で表示されるので、|:messages| で再表示できます。Ansi エス
+ケープシーケンスは除去されます。
+
+
 取扱いをファイルまたはディレクトリに強制する	*netrw-gd* *netrw-gf* {{{2
 
 リモートのシンボリックリンク (ssh や ftp を使用時) はリンク先がファイルなのか
 ディレクトリなのかを知るのが難しいという問題があります。
 
 強制的にファイルとして扱うには次のコマンドを使います: >
-	gd
+	gf
 <
 強制的にディレクトリとして扱うには次のコマンドを使います: >
-	gf
+	gd
 <
 
 親ディレクトリに移動する					*netrw--* {{{2
@@ -1891,8 +1900,8 @@ mt (|netrw-mt|) で移動先ディレクトリを選択し、ファイルのあ�
 成するために ssh が使われます (|g:netrw_ssh_cmd|参照)。したがって、リモートシ
 ステムの ssh でコマンドが使えなければなりません。ローカルで使う場合は、|ctags|
 を参照して ctags を準備してください。私は個人的に hdrtags を使っています。
-hdrtags は http://mysite.verizon.net/astronaut/src/index.html から入手できま
-す。これを使う場合は <.vimrc> で次のように設定してください: >
+hdrtags は http://www.drchip.org/astronaut/src/index.html から入手できます。こ
+れを使う場合は <.vimrc> で次のように設定してください: >
 
 	let g:netrw_ctags= "hdrtag"
 <
@@ -2020,6 +2029,9 @@ netrw ブラウザの各種設定は変数で管理されていて、それを�
                                      い場合はゼロを設定する。
 				     (関連: |netrw-qb| |netrw-u| |netrw-U|)
 
+  *g:netrw_dynamic_maxfilenamelen* =32: |g:netrw_maxfilenamelen| (ローカルファ
+				    イルの long 一覧表示で使用される) の動的判
+				    定を有効にする。
   *g:netrw_errorlvl*		=0: この値以上のエラーレベルであれば表示が許可
 				    される。
 				    0: 注意
@@ -2591,10 +2603,10 @@ V (|linewise-visual|) で選択することで複数のファイル/ディレク
 		Preferences > Editors で gvim をエディタとして設定する:
 
 			- "Add..." をクリック
-			- 外部エディタを設定 (パスは適当に調節してください。ク
-			  オートを付けて最後に !.! を付ける):
+			- 外部エディタを設定 (パスは適当に調節してください。
+			  クォートを付けて最後に !.! を付ける):
 			    "c:\Program Files\Vim\vim70\gvim.exe" !.!
-			- 設定画面のの下の方を見てファイルタイプが
+			- 設定画面の下の方を見てファイルタイプが
 			  {asterisk}.{asterisk} (すべてのファイル)、または自分
 			  の設定したい値になっているのを確認する (cec:
 			  {asterisk} は * に読み替えてください。こういう風に書
@@ -2752,13 +2764,13 @@ V (|linewise-visual|) で選択することで複数のファイル/ディレク
 
 	1. <Decho.vim> スクリプトを入手してください:
 
-	     http://mysite.verizon.net/astronaut/vim/index.html#DECHO
+	     http://www.drchip.org/astronaut/vim/index.html#DECHO
 	   or
 	     http://vim.sourceforge.net/scripts/script.php?script_id=120
 
 	  スクリプトは "vimball" になっています。7.0 かそれ以前の vim を使って
 	  いる場合は vimball もアップデートする必要があります。
-	     http://mysite.verizon.net/astronaut/vim/index.html#VIMBALL
+	     http://www.drchip.org/astronaut/vim/index.html#VIMBALL
 
 	2. 次のようにして <netrw.vim> ファイルを編集してください: >
 
@@ -2790,57 +2802,77 @@ V (|linewise-visual|) で選択することで複数のファイル/ディレク
 ==============================================================================
 12. 変更履歴						*netrw-history* {{{1
 
-	v145: Apr 05, 2012 * moved some command from a g:netrw_local_...
-			     format to g:netwr_local... format
-			   * included some NOTE level messages about
-			     commands that aren't executable
-			   * |g:netrw_errorlvl| (default: NOTE=0)
-			     option introduced
-	v144: Mar 12, 2012 * when |CTRL-W_s| or |CTRL-W_v| are used,
-			     or their wincmd equivalents, on a netrw
-			     buffer, the netrw's w: variables were
-			     not copied over.  Fixed.
-	      Mar 13, 2012 * nbcd_curpos_{bufnr('%')} was commented
-			     out, and was mistakenly used during
-			     RestorePosn.  Unfortunately, I'm not
-			     sure why it was commented out, so this
-			     "fix" may re-introduce an earlier problem.
-	      Mar 21, 2012 * included s:rexposn internally to make
-			     :Rex return the cursor to the same pos'n
-			     upon restoration of netrw buffer
-	      Mar 27, 2012 * (sjbesse) s:NetrwGetFile() needs to remove
-			     "/" from the netrw buffer's usual |'isk'|
-			     in order to allow "filetype detect" to work
-			     properly for scripts.
-	v143: Jun 01, 2011 * |g:netrw_winsize| will accept a negative
-			     number; the absolute value of it will then
-			     be used to specify lines/columns instead of
-			     a percentage.
-	      Jul 05, 2011 * the "d" map now supports mkdir via ftp
-			     See |netrw-d| and |g:netrw_remote_mkdir|
-	      Jul 11, 2011 * Changed Explore!, Sexplore!, and Vexplore
-			     to use a percentage of |winwidth()| instead
-			     of a percentage of |winheight()|.
-	      Jul 11, 2011 * included support for https://... I'm just
-			     beginning to test this, however.
-	      Aug 01, 2011 * changed RestoreOptions to also restore
-			     cursor position in netrw buffers.
-	      Aug 12, 2011 * added a note about "%" to the balloon
-	      Aug 30, 2011 * if |g:netrw_nobeval| exists, then balloon
-			     evaluation is suppressed.
-	      Aug 31, 2011 * (Benjamin R Haskell) provided a patch that
-			     implements non-standard port handling for
-			     files opened via the remote browser.
-	      Aug 31, 2011 * Fixed a **//pattern  Explorer bug
-	      Sep 15, 2011 * (reported by Francesco Campana) netrw
-			     now permits the "@" to be part of the
-			     user id (if there's an @ that appears
-			     to the right).
-	      Nov 21, 2011 * New option: |g:netrw_ftp_options|
-	      Dec 07, 2011 * (James Sinclair) provided a fix handling
-	      		     attempts to use a uid and password when
-			     they weren't defined.  This affected
-			     NetWrite (NetRead already had that fix).
+	v146:	Oct 20, 2012	* (David Kotchan) reported that under Windows,
+				  directories named with unusual characters
+				  such as "#" or "$" were not being listed
+				  properly.
+				* (Kenny Lee) reported that the buffer list
+				  was being populated by netrw buffers.
+				  Netrw will now |:bwipe| netrw buffers
+				  upon editing a file if g:netrw_fastbrowse
+				  is zero and its not in tree listing style.
+	v145:	Apr 05, 2012	* moved some command from a g:netrw_local_...
+				  format to g:netwr_local... format
+				* included some NOTE level messages about
+				  commands that aren't executable
+				* |g:netrw_errorlvl| (default: NOTE=0)
+				  option introduced
+		May 18, 2012	* (Ilya Dogolazky) a scenario where a
+				  |g:netrw_fastbrowse| of zero did not
+				  have a local directory refreshed fixed.
+		Jul 10, 2012	* (Donatas) |netrw-gb| wasn't working due
+				  to an incorrectly used variable.
+		Aug 09, 2012	* (Bart Baker) netrw was doubling
+				  of entries after a split.
+				* (code by Takahiro Yoshihara) implemented
+				  |g:netrw_dynamic_maxfilenamelen|
+		Aug 31, 2012	* (Andrew Wong) netrw refresh overwriting
+				  the yank buffer.
+	v144: Mar 12, 2012	* when |CTRL-W_s| or |CTRL-W_v| are used,
+				  or their wincmd equivalents, on a netrw
+				  buffer, the netrw's w: variables were
+				  not copied over.  Fixed.
+		Mar 13, 2012	* nbcd_curpos_{bufnr('%')} was commented
+				  out, and was mistakenly used during
+				  RestorePosn.  Unfortunately, I'm not
+				  sure why it was commented out, so this
+				  "fix" may re-introduce an earlier problem.
+		Mar 21, 2012	* included s:rexposn internally to make
+				  :Rex return the cursor to the same pos'n
+				  upon restoration of netrw buffer
+		Mar 27, 2012	* (sjbesse) s:NetrwGetFile() needs to remove
+				  "/" from the netrw buffer's usual |'isk'|
+				  in order to allow "filetype detect" to work
+				  properly for scripts.
+	v143: Jun 01, 2011	* |g:netrw_winsize| will accept a negative
+				  number; the absolute value of it will then
+				  be used to specify lines/columns instead of
+				  a percentage.
+		Jul 05, 2011	* the "d" map now supports mkdir via ftp
+				  See |netrw-d| and |g:netrw_remote_mkdir|
+		Jul 11, 2011	* Changed Explore!, Sexplore!, and Vexplore
+				  to use a percentage of |winwidth()| instead
+				  of a percentage of |winheight()|.
+		Jul 11, 2011	* included support for https://... I'm just
+				  beginning to test this, however.
+		Aug 01, 2011	* changed RestoreOptions to also restore
+				  cursor position in netrw buffers.
+		Aug 12, 2011	* added a note about "%" to the balloon
+		Aug 30, 2011	* if |g:netrw_nobeval| exists, then balloon
+				  evaluation is suppressed.
+		Aug 31, 2011	* (Benjamin R Haskell) provided a patch that
+				  implements non-standard port handling for
+				  files opened via the remote browser.
+		Aug 31, 2011	* Fixed a **//pattern  Explorer bug
+		Sep 15, 2011	* (reported by Francesco Campana) netrw
+				  now permits the "@" to be part of the
+				  user id (if there's an @ that appears
+				  to the right).
+		Nov 21, 2011	* New option: |g:netrw_ftp_options|
+		Dec 07, 2011	* (James Sinclair) provided a fix handling
+				  attempts to use a uid and password when
+				  they weren't defined.  This affected
+				  NetWrite (NetRead already had that fix).
 
 
 ==============================================================================

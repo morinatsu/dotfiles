@@ -16,6 +16,7 @@
 :NeoComplCacheCachingSnippets	neosnippet.txt	/*:NeoComplCacheCachingSnippets*
 :NeoComplCacheCachingSyntax	neocomplcache.txt	/*:NeoComplCacheCachingSyntax*
 :NeoComplCacheCachingTags	neocomplcache.txt	/*:NeoComplCacheCachingTags*
+:NeoComplCacheClean	neocomplcache.txt	/*:NeoComplCacheClean*
 :NeoComplCacheCreateTags	neocomplcache.txt	/*:NeoComplCacheCreateTags*
 :NeoComplCacheDisable	neocomplcache.txt	/*:NeoComplCacheDisable*
 :NeoComplCacheEditRuntimeSnippets	neosnippet.txt	/*:NeoComplCacheEditRuntimeSnippets*
@@ -74,6 +75,7 @@
 <Plug>(unite_insert_head)	unite.txt	/*<Plug>(unite_insert_head)*
 <Plug>(unite_loop_cursor_down)	unite.txt	/*<Plug>(unite_loop_cursor_down)*
 <Plug>(unite_loop_cursor_up)	unite.txt	/*<Plug>(unite_loop_cursor_up)*
+<Plug>(unite_narrowing_dot)	unite.txt	/*<Plug>(unite_narrowing_dot)*
 <Plug>(unite_narrowing_input_history)	unite.txt	/*<Plug>(unite_narrowing_input_history)*
 <Plug>(unite_narrowing_path)	unite.txt	/*<Plug>(unite_narrowing_path)*
 <Plug>(unite_new_candidate)	unite.txt	/*<Plug>(unite_new_candidate)*
@@ -372,6 +374,15 @@ Vital.System.Filepath.split()	vital-system-filepath.txt	/*Vital.System.Filepath.
 Vital.System.Filepath.unify_separator()	vital-system-filepath.txt	/*Vital.System.Filepath.unify_separator()*
 Vital.System.Filepath.which()	vital-system-filepath.txt	/*Vital.System.Filepath.which()*
 Vital.Text.Lexer-contents	vital-text-lexer.txt	/*Vital.Text.Lexer-contents*
+Vital.Text.Ltsv-contents	vital-text-ltsv.txt	/*Vital.Text.Ltsv-contents*
+Vital.Text.Ltsv-functions	vital-text-ltsv.txt	/*Vital.Text.Ltsv-functions*
+Vital.Text.Ltsv-interface	vital-text-ltsv.txt	/*Vital.Text.Ltsv-interface*
+Vital.Text.Ltsv-introduction	vital-text-ltsv.txt	/*Vital.Text.Ltsv-introduction*
+Vital.Text.Ltsv.dump()	vital-text-ltsv.txt	/*Vital.Text.Ltsv.dump()*
+Vital.Text.Ltsv.dump_file()	vital-text-ltsv.txt	/*Vital.Text.Ltsv.dump_file()*
+Vital.Text.Ltsv.parse()	vital-text-ltsv.txt	/*Vital.Text.Ltsv.parse()*
+Vital.Text.Ltsv.parse_file()	vital-text-ltsv.txt	/*Vital.Text.Ltsv.parse_file()*
+Vital.Text.Ltsv.parse_record()	vital-text-ltsv.txt	/*Vital.Text.Ltsv.parse_record()*
 Vital.Vim.BufferManager	vital-vim-buffer_manager.txt	/*Vital.Vim.BufferManager*
 Vital.Vim.BufferManager-Manager	vital-vim-buffer_manager.txt	/*Vital.Vim.BufferManager-Manager*
 Vital.Vim.BufferManager-Manager.add()	vital-vim-buffer_manager.txt	/*Vital.Vim.BufferManager-Manager.add()*
@@ -440,7 +451,6 @@ Vital.Web.Xml-structures	vital-web-xml.txt	/*Vital.Web.Xml-structures*
 Vital.Web.Xml.parse()	vital-web-xml.txt	/*Vital.Web.Xml.parse()*
 Vital.Web.Xml.parseFile()	vital-web-xml.txt	/*Vital.Web.Xml.parseFile()*
 Vital.Web.Xml.parseURI()	vital-web-xml.txt	/*Vital.Web.Xml.parseURI()*
-abbrev_complete	neocomplcache.txt	/*abbrev_complete*
 b:neocomplcache_sources_list	neocomplcache.txt	/*b:neocomplcache_sources_list*
 b:quickrun_config	quickrun.txt	/*b:quickrun_config*
 buffer_complete	neocomplcache.txt	/*buffer_complete*
@@ -514,6 +524,7 @@ g:neocomplcache_disable_caching_file_path_pattern	neocomplcache.txt	/*g:neocompl
 g:neocomplcache_disable_select_mode_mappings	neosnippet.txt	/*g:neocomplcache_disable_select_mode_mappings*
 g:neocomplcache_disabled_sources_list	neocomplcache.txt	/*g:neocomplcache_disabled_sources_list*
 g:neocomplcache_enable_at_startup	neocomplcache.txt	/*g:neocomplcache_enable_at_startup*
+g:neocomplcache_enable_auto_close_preview	neocomplcache.txt	/*g:neocomplcache_enable_auto_close_preview*
 g:neocomplcache_enable_auto_delimiter	neocomplcache.txt	/*g:neocomplcache_enable_auto_delimiter*
 g:neocomplcache_enable_auto_select	neocomplcache.txt	/*g:neocomplcache_enable_auto_select*
 g:neocomplcache_enable_caching_message	neocomplcache.txt	/*g:neocomplcache_enable_caching_message*
@@ -572,6 +583,7 @@ g:neocomplcache_vim_completefuncs	neocomplcache.txt	/*g:neocomplcache_vim_comple
 g:neocomplcache_wildcard_characters	neocomplcache.txt	/*g:neocomplcache_wildcard_characters*
 g:neosnippet#disable_runtime_snippets	neosnippet.txt	/*g:neosnippet#disable_runtime_snippets*
 g:neosnippet#disable_select_mode_mappings	neosnippet.txt	/*g:neosnippet#disable_select_mode_mappings*
+g:neosnippet#enable_preview	neosnippet.txt	/*g:neosnippet#enable_preview*
 g:neosnippet#enable_snipmate_compatibility	neosnippet.txt	/*g:neosnippet#enable_snipmate_compatibility*
 g:neosnippet#snippets_directory	neosnippet.txt	/*g:neosnippet#snippets_directory*
 g:openbuf#config	openbuf.txt	/*g:openbuf#config*
@@ -597,6 +609,7 @@ g:unite_no_default_keymappings	unite.txt	/*g:unite_no_default_keymappings*
 g:unite_quick_match_table	unite.txt	/*g:unite_quick_match_table*
 g:unite_source_alias_aliases	unite.txt	/*g:unite_source_alias_aliases*
 g:unite_source_bookmark_directory	unite.txt	/*g:unite_source_bookmark_directory*
+g:unite_source_buffer_time_format	unite.txt	/*g:unite_source_buffer_time_format*
 g:unite_source_directory_mru_directory	unite.txt	/*g:unite_source_directory_mru_directory*
 g:unite_source_directory_mru_filename_format	unite.txt	/*g:unite_source_directory_mru_filename_format*
 g:unite_source_directory_mru_ignore_pattern	unite.txt	/*g:unite_source_directory_mru_ignore_pattern*
@@ -608,7 +621,9 @@ g:unite_source_file_mru_filename_format	unite.txt	/*g:unite_source_file_mru_file
 g:unite_source_file_mru_ignore_pattern	unite.txt	/*g:unite_source_file_mru_ignore_pattern*
 g:unite_source_file_mru_limit	unite.txt	/*g:unite_source_file_mru_limit*
 g:unite_source_file_mru_time_format	unite.txt	/*g:unite_source_file_mru_time_format*
+g:unite_source_file_rec_async_command	unite.txt	/*g:unite_source_file_rec_async_command*
 g:unite_source_file_rec_ignore_pattern	unite.txt	/*g:unite_source_file_rec_ignore_pattern*
+g:unite_source_file_rec_max_cache_files	unite.txt	/*g:unite_source_file_rec_max_cache_files*
 g:unite_source_file_rec_min_cache_files	unite.txt	/*g:unite_source_file_rec_min_cache_files*
 g:unite_source_find_command	unite.txt	/*g:unite_source_find_command*
 g:unite_source_find_ignore_pattern	unite.txt	/*g:unite_source_find_ignore_pattern*
@@ -625,6 +640,7 @@ g:unite_source_history_yank_limit	unite.txt	/*g:unite_source_history_yank_limit*
 g:unite_source_line_enable_highlight	unite.txt	/*g:unite_source_line_enable_highlight*
 g:unite_source_line_search_word_highlight	unite.txt	/*g:unite_source_line_search_word_highlight*
 g:unite_source_menu_menus	unite.txt	/*g:unite_source_menu_menus*
+g:unite_source_process_enable_confirm	unite.txt	/*g:unite_source_process_enable_confirm*
 g:unite_source_vimgrep_ignore_pattern	unite.txt	/*g:unite_source_vimgrep_ignore_pattern*
 g:unite_source_vimgrep_search_word_highlight	unite.txt	/*g:unite_source_vimgrep_search_word_highlight*
 g:unite_split_rule	unite.txt	/*g:unite_split_rule*
@@ -704,7 +720,8 @@ neocomplcache#sources#snippets_complete#get_snippets_dir()	neosnippet.txt	/*neoc
 neocomplcache#sources#snippets_complete#jumpable()	neosnippet.txt	/*neocomplcache#sources#snippets_complete#jumpable()*
 neocomplcache#start_manual_complete()	neocomplcache.txt	/*neocomplcache#start_manual_complete()*
 neocomplcache#undo_completion()	neocomplcache.txt	/*neocomplcache#undo_completion()*
-neocomplcache-asyncronous	neocomplcache.txt	/*neocomplcache-asyncronous*
+neocomplcache-RECOMMENDATION	neocomplcache.txt	/*neocomplcache-RECOMMENDATION*
+neocomplcache-asynchronous	neocomplcache.txt	/*neocomplcache-asynchronous*
 neocomplcache-changelog	neocomplcache.txt	/*neocomplcache-changelog*
 neocomplcache-commands	neocomplcache.txt	/*neocomplcache-commands*
 neocomplcache-contents	neocomplcache.txt	/*neocomplcache-contents*
@@ -746,6 +763,8 @@ neosnippet-introduction	neosnippet.txt	/*neosnippet-introduction*
 neosnippet-key-mappings	neosnippet.txt	/*neosnippet-key-mappings*
 neosnippet-snippet-syntax	neosnippet.txt	/*neosnippet-snippet-syntax*
 neosnippet-unite-action-snippet	neosnippet.txt	/*neosnippet-unite-action-snippet*
+neosnippet-unite-source-neosnippet/runtime	neosnippet.txt	/*neosnippet-unite-source-neosnippet\/runtime*
+neosnippet-unite-source-neosnippet/user	neosnippet.txt	/*neosnippet-unite-source-neosnippet\/user*
 neosnippet-unite-source-snippet	neosnippet.txt	/*neosnippet-unite-source-snippet*
 neosnippet-unite-sources	neosnippet.txt	/*neosnippet-unite-sources*
 neosnippet-variables	neosnippet.txt	/*neosnippet-variables*
@@ -974,6 +993,7 @@ unite-options-default-action	unite.txt	/*unite-options-default-action*
 unite-options-direction	unite.txt	/*unite-options-direction*
 unite-options-here	unite.txt	/*unite-options-here*
 unite-options-hide-source-names	unite.txt	/*unite-options-hide-source-names*
+unite-options-hide-status-line	unite.txt	/*unite-options-hide-status-line*
 unite-options-horizontal	unite.txt	/*unite-options-horizontal*
 unite-options-immediately	unite.txt	/*unite-options-immediately*
 unite-options-input	unite.txt	/*unite-options-input*
@@ -1122,6 +1142,8 @@ vital-locale-message.txt	vital-locale-message.txt	/*vital-locale-message.txt*
 vital-system-file.txt	vital-system-file.txt	/*vital-system-file.txt*
 vital-system-filepath.txt	vital-system-filepath.txt	/*vital-system-filepath.txt*
 vital-text-lexer.txt	vital-text-lexer.txt	/*vital-text-lexer.txt*
+vital-text-ltsv	vital-text-ltsv.txt	/*vital-text-ltsv*
+vital-text-ltsv.txt	vital-text-ltsv.txt	/*vital-text-ltsv.txt*
 vital-vim-buffer_manager.txt	vital-vim-buffer_manager.txt	/*vital-vim-buffer_manager.txt*
 vital-vim-compat.txt	vital-vim-compat.txt	/*vital-vim-compat.txt*
 vital-web-html.txt	vital-web-html.txt	/*vital-web-html.txt*

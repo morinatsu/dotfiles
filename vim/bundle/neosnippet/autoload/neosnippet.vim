@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neosnippet.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 10 Mar 2013.
+" Last Modified: 16 Apr 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -557,11 +557,15 @@ function! neosnippet#expand(cur_text, col, trigger_name) "{{{
 
   " Substitute markers.
   let snip_word = substitute(snip_word,
-        \ s:get_placeholder_marker_substitute_pattern(),
+        \ '\\\@<!'.s:get_placeholder_marker_substitute_pattern(),
         \ '<`\1`>', 'g')
   let snip_word = substitute(snip_word,
-        \ s:get_mirror_placeholder_marker_substitute_pattern(),
+        \ '\\\@<!'.s:get_mirror_placeholder_marker_substitute_pattern(),
         \ '<|\1|>', 'g')
+  let snip_word = substitute(snip_word,
+        \ '\\'.s:get_mirror_placeholder_marker_substitute_pattern().'\|'.
+        \ '\\'.s:get_placeholder_marker_substitute_pattern(),
+        \ '\=submatch(0)[1:]', 'g')
 
   " Insert snippets.
   let next_line = getline('.')[a:col-1 :]
@@ -578,7 +582,9 @@ function! neosnippet#expand(cur_text, col, trigger_name) "{{{
   let snippet_lines[-1] = snippet_lines[-1] . next_line
 
   if has('folding')
-    let foldmethod = &l:foldmethod
+    " Note: Change foldmethod to "manual". Because, if you use foldmethod is
+    " expr, whole snippet is visually selected.
+    let foldmethod_save = &l:foldmethod
     let &l:foldmethod = 'manual'
   endif
 
@@ -609,7 +615,10 @@ function! neosnippet#expand(cur_text, col, trigger_name) "{{{
     endif
   finally
     if has('folding')
-      let &l:foldmethod = foldmethod
+      if foldmethod_save !=# &l:foldmethod
+        let &l:foldmethod = foldmethod_save
+      endif
+
       silent! execute begin_line . ',' . end_line . 'foldopen!'
     endif
   endtry
@@ -882,11 +891,6 @@ function! s:expand_target_placeholder(line, col) "{{{
   let begin_line = a:line
   let end_line = a:line + len(target_lines) - 1
 
-  if has('folding')
-    let foldmethod = &l:foldmethod
-    let &l:foldmethod = 'manual'
-  endif
-
   let col = col('.')
   try
     let base_indent = matchstr(cur_text, '^\s\+')
@@ -907,7 +911,6 @@ function! s:expand_target_placeholder(line, col) "{{{
     endif
   finally
     if has('folding')
-      let &l:foldmethod = foldmethod
       silent! execute begin_line . ',' . end_line . 'foldopen!'
     endif
   endtry

@@ -78,11 +78,8 @@ Below is Make command.
 * Windows using Visual Studio(32bit/64bit Vim): >
 	$ nmake -f Make_msvc.mak nodebug=1
 
-* Mac OS X using LLVM: >
+* Mac OS X: >
 	$ make -f make_mac.mak
-
-* Old Mac OS X(llvm-gcc is not installed): >
-	$ make -f make_mac_old.mak
 
 * Linux/BSD: >
 	$ make -f make_unix.mak
@@ -90,7 +87,7 @@ Below is Make command.
 * Cygwin: >
 	$ make -f make_cygwin.mak
 
-* Solaris/Sun  OS: >
+* Solaris/SunOS: >
 	$ make -f make_sunos.mak
 
 * Android: >
@@ -103,7 +100,7 @@ I compiled vimproc_win**.dll in 32/64 bit Windows, and distributed it below
 URL.
 Note: I DON'T recommend to use it. You should build dll files manually.
 https://github.com/Shougo/vimproc/downloads
-Note: Github dowonloads feature is deprecated. It may be deleted.
+Note: Github downloads feature is deprecated. It may be deleted.
 
 You can use Kaoriya Vim in Windows. It includes vimproc dll file.
 (http://www.kaoriya.net/news/2012/20121213)
@@ -384,6 +381,12 @@ EXAMPLES					*vimproc-examples*
 <
 ==============================================================================
 CHANGELOG					*vimproc-changelog*
+
+2013-04-17
+- Improved vimproc#readdir().
+
+2013-04-07
+- Fixed vimproc#system_passwd().
 
 2013-03-23
 - Fixed for double quote.

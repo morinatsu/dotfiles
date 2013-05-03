@@ -230,6 +230,7 @@ Vital.Data.String.reverse()	vital-data-string.txt	/*Vital.Data.String.reverse()*
 Vital.Data.String.scan()	vital-data-string.txt	/*Vital.Data.String.scan()*
 Vital.Data.String.split3()	vital-data-string.txt	/*Vital.Data.String.split3()*
 Vital.Data.String.split_leftright()	vital-data-string.txt	/*Vital.Data.String.split_leftright()*
+Vital.Data.String.trim()	vital-data-string.txt	/*Vital.Data.String.trim()*
 Vital.Data.String.wrap()	vital-data-string.txt	/*Vital.Data.String.wrap()*
 Vital.Data.Tree	vital-data-tree.txt	/*Vital.Data.Tree*
 Vital.Data.Tree-contents	vital-data-tree.txt	/*Vital.Data.Tree-contents*
@@ -317,7 +318,7 @@ Vital.DateTime.now()	vital-date_time.txt	/*Vital.DateTime.now()*
 Vital.DateTime.timezone()	vital-date_time.txt	/*Vital.DateTime.timezone()*
 Vital.Lexer	vital-text-lexer.txt	/*Vital.Lexer*
 Vital.Lexer-Lexer	vital-text-lexer.txt	/*Vital.Lexer-Lexer*
-Vital.Lexer-Lexer.parse()	vital-text-lexer.txt	/*Vital.Lexer-Lexer.parse()*
+Vital.Lexer-Lexer.exec()	vital-text-lexer.txt	/*Vital.Lexer-Lexer.exec()*
 Vital.Lexer-Parser	vital-text-lexer.txt	/*Vital.Lexer-Parser*
 Vital.Lexer-Parser.consume()	vital-text-lexer.txt	/*Vital.Lexer-Parser.consume()*
 Vital.Lexer-Parser.end()	vital-text-lexer.txt	/*Vital.Lexer-Parser.end()*
@@ -722,6 +723,14 @@ neocomplcache#start_manual_complete()	neocomplcache.txt	/*neocomplcache#start_ma
 neocomplcache#undo_completion()	neocomplcache.txt	/*neocomplcache#undo_completion()*
 neocomplcache-RECOMMENDATION	neocomplcache.txt	/*neocomplcache-RECOMMENDATION*
 neocomplcache-asynchronous	neocomplcache.txt	/*neocomplcache-asynchronous*
+neocomplcache-candidate-attribute-abbr	neocomplcache.txt	/*neocomplcache-candidate-attribute-abbr*
+neocomplcache-candidate-attribute-info	neocomplcache.txt	/*neocomplcache-candidate-attribute-info*
+neocomplcache-candidate-attribute-kind	neocomplcache.txt	/*neocomplcache-candidate-attribute-kind*
+neocomplcache-candidate-attribute-menu	neocomplcache.txt	/*neocomplcache-candidate-attribute-menu*
+neocomplcache-candidate-attribute-name	neocomplcache.txt	/*neocomplcache-candidate-attribute-name*
+neocomplcache-candidate-attribute-neocomplcache__refresh	neocomplcache.txt	/*neocomplcache-candidate-attribute-neocomplcache__refresh*
+neocomplcache-candidate-attribute-rank	neocomplcache.txt	/*neocomplcache-candidate-attribute-rank*
+neocomplcache-candidate-attributes	neocomplcache.txt	/*neocomplcache-candidate-attributes*
 neocomplcache-changelog	neocomplcache.txt	/*neocomplcache-changelog*
 neocomplcache-commands	neocomplcache.txt	/*neocomplcache-commands*
 neocomplcache-contents	neocomplcache.txt	/*neocomplcache-contents*
@@ -733,6 +742,17 @@ neocomplcache-install	neocomplcache.txt	/*neocomplcache-install*
 neocomplcache-interface	neocomplcache.txt	/*neocomplcache-interface*
 neocomplcache-introduction	neocomplcache.txt	/*neocomplcache-introduction*
 neocomplcache-key-mappings	neocomplcache.txt	/*neocomplcache-key-mappings*
+neocomplcache-source-attribute-filetypes	neocomplcache.txt	/*neocomplcache-source-attribute-filetypes*
+neocomplcache-source-attribute-finalize	neocomplcache.txt	/*neocomplcache-source-attribute-finalize*
+neocomplcache-source-attribute-hooks	neocomplcache.txt	/*neocomplcache-source-attribute-hooks*
+neocomplcache-source-attribute-hooks-on_final	neocomplcache.txt	/*neocomplcache-source-attribute-hooks-on_final*
+neocomplcache-source-attribute-hooks-on_init	neocomplcache.txt	/*neocomplcache-source-attribute-hooks-on_init*
+neocomplcache-source-attribute-initialize	neocomplcache.txt	/*neocomplcache-source-attribute-initialize*
+neocomplcache-source-attribute-kind	neocomplcache.txt	/*neocomplcache-source-attribute-kind*
+neocomplcache-source-attribute-name	neocomplcache.txt	/*neocomplcache-source-attribute-name*
+neocomplcache-source-attribute-rank	neocomplcache.txt	/*neocomplcache-source-attribute-rank*
+neocomplcache-source-attribute-required_pattern_length	neocomplcache.txt	/*neocomplcache-source-attribute-required_pattern_length*
+neocomplcache-source-attributes	neocomplcache.txt	/*neocomplcache-source-attributes*
 neocomplcache-sources	neocomplcache.txt	/*neocomplcache-sources*
 neocomplcache-sources-neco-ghc	neocomplcache.txt	/*neocomplcache-sources-neco-ghc*
 neocomplcache-sources-neosnippet	neocomplcache.txt	/*neocomplcache-sources-neosnippet*
@@ -1011,6 +1031,7 @@ unite-options-profile-name	unite.txt	/*unite-options-profile-name*
 unite-options-prompt	unite.txt	/*unite-options-prompt*
 unite-options-quick-match	unite.txt	/*unite-options-quick-match*
 unite-options-resume	unite.txt	/*unite-options-resume*
+unite-options-select	unite.txt	/*unite-options-select*
 unite-options-short-source-names	unite.txt	/*unite-options-short-source-names*
 unite-options-silent	unite.txt	/*unite-options-silent*
 unite-options-start-insert	unite.txt	/*unite-options-start-insert*

@@ -403,7 +403,7 @@ g:unite_source_file_rec_async_command
 		Specifies the filelist command and arguments in file_rec/async
 		source.
 
-		The default value is "ag" or "ack-grep" or "find" and the args.
+		The default value is "ag" or "find" and the args.
 
 		The default value is 1000.
 g:unite_source_grep_command			*g:unite_source_grep_command*
@@ -1532,6 +1532,11 @@ context.
 		Note: This option will set 'wrap' option and disable
 		|unite-options-multi-line| option.
 
+						*unite-options-select*
+		-select={select-candidate-index}
+		If it is set, unite will select specified candidate.
+		Note: The candidate index is 0-origin.
+
 ==============================================================================
 SOURCES						*unite-sources*
 
@@ -1540,6 +1545,9 @@ file		Nominates an input file as a candidate.
 		Note: This source doesn't nominate files in parent directory
 		(Example: "../") or hidden files(Example: ".gitignore").
 		If you want to open these files, please input ".".
+
+		Source arguments:
+		1. the file/directory path.
 
 						*unite-source-file/new*
 file/new	Nominates a new input file as a candidate.
@@ -1570,7 +1578,7 @@ file_rec	Gather files recursive and nominates all directory or file
 file_rec/async	Same as |unite-source-file_rec|, but get files asynchronously.
 		
 		Note: This source requires vimproc.
-		Note: This source requires "ag" or "ack-grep" or "find" command.
+		Note: This source requires "ag" or "find" command.
 		Note: Windows "find" command is not supported.
 		Note: If you edit file by Vim, file_rec/async source will
 		update cache file.
@@ -1704,7 +1712,7 @@ grep		Nominates "grep" command output as candidates.
 	if executable('ag')
 	  " Use ag in unite grep source.
 	  let g:unite_source_grep_command = 'ag'
-	  let g:unite_source_grep_default_opts = '--nocolor --nogroup --column'
+	  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
 	  let g:unite_source_grep_recursive_opt = ''
 	elseif executable('ack-grep')
 	  " Use ack in unite grep source.
@@ -2966,8 +2974,65 @@ Q: I want to exit unite buffer after narrowing action in directory.
 
 A: You should use |<Plug>(unite_all_exit)| instead of |<Plug>(unite_exit)|.
 
+Q: How to make direct action (or choose action menu) to current file or given
+path?
+
+A:
+>
+	call unite#do_candidates_action('some_action',
+	\  unite#get_candidates([['file', expand('%')]]))
+<
+
 ==============================================================================
 CHANGELOG					*unite-changelog*
+
+2013-04-22
+- Changed tab source behavior.
+
+2013-04-18
+- Improved documentation for ag.
+- Fixed unite#get_candidates().
+
+2013-04-17
+- Use vimproc#readdir() in file_rec source.
+- Changed start action in source kind.
+
+2013-04-14
+- Fixed action source problems.
+
+2013-04-13
+- Improved narrow action.
+
+2013-04-12
+- Enabled lua interface feature.
+
+2013-04-11
+- Improved print message feature.
+
+2013-04-10
+- Temporally disabled if_lua feature. Because if_lua has SEGV problem.
+
+2013-04-07
+- Fixed filter.
+- Added unite#util#has_lua().
+- Improved source file.
+
+2013-04-06
+- Improved quick match behavior.
+
+2013-04-04
+- Fixed file_rec/async source.
+- Improved unite#get_unite_bufnr()/unite#get_unite_winnr().
+
+2013-04-02
+- Fixed action__path problem.
+- Improved vimfiler redraw behavior.
+- Fixed narrow action.
+- Fixed file_rec/async source.
+- Fixed close previous unite buffer behavior.
+
+2013-04-01
+- Optimized for files.
 
 2013-03-31
 - Added g:unite_source_file_rec_async_command option.

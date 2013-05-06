@@ -53,6 +53,7 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'thinca/vim-scouter'
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'git://github.com/vim-jp/vital.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/vim-jp/vimdoc-ja.git'
@@ -92,3 +93,11 @@ let g:neocomplcache_enable_insert_char_pre = 1
 " for snippets
 imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
+
+" for solarized
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized

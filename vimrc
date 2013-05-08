@@ -101,3 +101,6 @@ else
     set background=dark
 endif
 colorscheme solarized
+
+" disable IME, when exit insert mode
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>

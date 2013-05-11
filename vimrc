@@ -61,6 +61,7 @@ NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'
+NeoBundle 'YankRing.vim'
 filetype plugin on
 filetype indent on
 

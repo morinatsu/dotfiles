@@ -61,7 +61,7 @@ NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'
-NeoBundle 'YankRing.vim'
+NeoBundle 'vim-scripts/YankRing.vim'
 filetype plugin on
 filetype indent on
 
@@ -105,3 +105,7 @@ colorscheme solarized
 
 " disable IME, when exit insert mode
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+
+" for YankRing.vim
+set clipboard+=unnamedplus,unnamed
+nmap ,y :YRShow<CR>

@@ -63,6 +63,7 @@ NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'tpope/vim-fugitive'
 
 filetype plugin on
 filetype indent on

@@ -110,5 +110,6 @@ colorscheme solarized
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 
 " for YankRing.vim
+let g:yankring_history_file = '.yankring_history_file'
 set clipboard+=unnamedplus,unnamed
 nmap ,y :YRShow<CR>

@@ -23,6 +23,12 @@ set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
 set nobackup
 set foldcolumn=4
 syntax on
+
+" reser autocmd
+augroup myvimrc
+    autocmd!
+augroup END
+
 autocmd FileType text setlocal textwidth=0
 
 " for neobundle
@@ -113,3 +119,12 @@ inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 let g:yankring_history_file = '.yankring_history_file'
 set clipboard+=unnamedplus,unnamed
 nmap ,y :YRShow<CR>
+
+" edit vimrc
+nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <F6> :<C-u>source $MYVIMRC<CR>
+                 \ :source $MYGVIMRC<CR>
+
+" 行末スペースをハイライトで可視化する
+autocmd myvimrc VimEnter,WinEnter * 
+\ match Error /s+$/

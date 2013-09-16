@@ -117,3 +117,9 @@ if [ -d ~/google_appengine ]; then
     PATH=$PATH:~/google_appengine
     export PATH
 fi
+
+# remake vimrc
+if [ -f ~/.vimrc ]; then
+    rm ~/.vimrc
+    ln ~/dotfiles/vim/vimrc ~/.vimrc
+fi

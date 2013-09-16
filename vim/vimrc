@@ -107,10 +107,9 @@ smap <C-k> <Plug>(neocomplcache_snippets_expand)
 " for solarized
 if has('gui_running')
     set background=light
-else
-    set background=dark
+    colorscheme solarized
 endif
-colorscheme solarized
+
 
 " disable IME, when exit insert mode
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>

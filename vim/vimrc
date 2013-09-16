@@ -128,3 +128,9 @@ nnoremap <F6> :<C-u>source $MYVIMRC<CR>
 " 行末スペースをハイライトで可視化する
 autocmd myvimrc VimEnter,WinEnter * 
 \ match Error /s+$/
+
+" カーソルキーがABCDにならないようにする
+imap OA <Up>
+imap OB <Down>
+imap OC <Right>
+imap OD <Left>

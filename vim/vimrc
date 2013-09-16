@@ -108,6 +108,8 @@ smap <C-k> <Plug>(neocomplcache_snippets_expand)
 if has('gui_running')
     set background=light
     colorscheme solarized
+else
+    colorscheme default
 endif
 
 
@@ -129,7 +131,7 @@ autocmd myvimrc VimEnter,WinEnter *
 \ match Error /s+$/
 
 " カーソルキーがABCDにならないようにする
-imap OA <Up>
-imap OB <Down>
-imap OC <Right>
-imap OD <Left>
+noremap OA <Up>
+noremap OB <Down>
+noremap OC <Right>
+noremap OD <Left>

@@ -72,6 +72,7 @@ NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mhinz/vim-startify'
+NeoBundle 'kakkyz81/evervim'
 
 filetype plugin on
 filetype indent on

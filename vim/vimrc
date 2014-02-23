@@ -194,3 +194,10 @@ noremap OA <Up>
 noremap OB <Down>
 noremap OC <Right>
 noremap OD <Left>
+
+" sorce credential file
+if has("win32") || has("win64")
+    source $HOME\vimfiles\vimrc_cred
+else
+    source ~/.vim/vimrc_cred
+endif

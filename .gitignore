@@ -2,3 +2,4 @@ vim/bundle/
 vim/vimrc_cred
 !vim/bundle/neobundle.vim
 .netrwhist
+*.un~

@@ -123,3 +123,6 @@ if [ -f ~/.vimrc ]; then
     rm ~/.vimrc
     ln ~/dotfiles/vim/vimrc ~/.vimrc
 fi
+
+# pythonz
+[[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc

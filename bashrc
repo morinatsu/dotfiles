@@ -107,12 +107,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# virtualenvwrapper
 export VIRTUALENV_USE_DISTRIBUTE=true
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     export WORKON_HOME=$HOME/.virtualenvs
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+# google app engine
 if [ -d ~/google_appengine ]; then
     PATH=$PATH:~/google_appengine
     export PATH
@@ -126,3 +128,6 @@ fi
 
 # pythonz
 [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
+
+# set tmux to byobu-backend
+export BYOBU_BACKEND=tmux

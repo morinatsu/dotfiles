@@ -87,13 +87,6 @@ filetype indent on
 " Installation check
 NeoBundleCheck
 
-" """neocomplcache"""
-if has("win32") || has("win64")
-"    let g:neocomplcache_snippets_dir = $HOME . '/vimfiles/snippets'
-else
-"    let g:neocomplcache_snippets_dir = $HOME . '/.vim/snippets'
-endif
-
 "Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.

@@ -66,7 +66,11 @@ NeoBundle 'vim-jp/vital.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'vim-scripts/sudo.vim'
-NeoBundle 'Lokaltog/powerline'
+if has("win32") || has("win64")
+    NeoBundle 'itchyny/lightline.vim'
+else
+    NeoBundle 'Lokaltog/powerline'
+endif
 NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'
 NeoBundle 'vim-scripts/YankRing.vim'
@@ -82,13 +86,6 @@ filetype indent on
 
 " Installation check
 NeoBundleCheck
-
-" """neocomplcache"""
-if has("win32") || has("win64")
-"    let g:neocomplcache_snippets_dir = $HOME . '/vimfiles/snippets'
-else
-"    let g:neocomplcache_snippets_dir = $HOME . '/.vim/snippets'
-endif
 
 "Disable AutoComplPop.
 let g:acp_enableAtStartup = 0

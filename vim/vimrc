@@ -40,6 +40,8 @@ if has('vim_starting')
     if has("win32") || has("win64")
         set shellpipe=
         set runtimepath+=$HOME/vimfiles/bundle/neobundle.vim/
+        set undodir=$TEMP/
+        set directory=$TEMP/
     else
         set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
@@ -80,6 +82,7 @@ NeoBundle 'mhinz/vim-startify'
 if has('python') || has('python3')
     NeoBundle 'kakkyz81/evervim'
 endif
+NeoBundle 'scrooloose/syntastic.git'
 
 filetype plugin on
 filetype indent on

@@ -83,6 +83,7 @@ if has('python') || has('python3')
     NeoBundle 'kakkyz81/evervim'
 endif
 NeoBundle 'scrooloose/syntastic.git'
+NeoBundle 'deton/imactivatemap.vim'
 
 filetype plugin on
 filetype indent on

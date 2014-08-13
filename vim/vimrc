@@ -75,7 +75,7 @@ else
 endif
 NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'
-NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'LeafCage/yankround.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mhinz/vim-startify'
@@ -209,10 +209,15 @@ endif
 " disable IME, when exit insert mode
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 
-" for YankRing.vim
-let g:yankring_history_file = '.yankring_history_file'
-set clipboard+=unnamedplus,unnamed
-nmap ,y :YRShow<CR>
+" for Yankround.vim
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
 
 " edit vimrc
 nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>

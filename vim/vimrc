@@ -225,7 +225,7 @@ nnoremap <F6> :<C-u>source $MYVIMRC<CR>
                  \ :source $MYGVIMRC<CR>
 
 " 行末スペースをハイライトで可視化する
-autocmd myvimrc VimEnter,WinEnter * 
+autocmd myvimrc VimEnter,WinEnter *
 \ match Error /s+$/
 
 " カーソルキーがABCDにならないようにする

@@ -53,11 +53,11 @@ else
 endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
+NeoBundle 'Shougo/vimproc.vim', {
     \ 'build' : {
-    \       'windows' : 'make -f make_mingw64.mak',
+    \       'windows' : 'tools\\update-dll-mingw',
     \       'unix' : 'make -f make_unix.mak',
-    \   }
+    \   },
     \ }
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'

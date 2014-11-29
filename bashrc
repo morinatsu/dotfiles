@@ -148,7 +148,7 @@ _powerline_tmux_setenv() {
 _powerline_tmux_set_pwd() {
     _powerline_tmux_setenv PWD "$PWD"
 }
- 
+
 _powerline_tmux_set_columns() {
     _powerline_tmux_setenv COLUMNS "$COLUMNS"
 }
@@ -166,3 +166,13 @@ _powerline_tmux_set_columns
 #[[ "$PROMPT_COMMAND" == "_powerline_prompt" ]] ||
 #    POWERLINE_OLD_PROMPT_COMMAND="$PROMPT_COMMAND"
 #export PROMPT_COMMAND="_powerline_prompt"
+
+# for get-git-ignore
+function _peco_ggi_list () {
+    lang=$(get-git-ignore | peco)
+
+    if [ -n "$lang" ]; then
+        get-git-ignore --lang=$lang
+    fi
+}
+alias ggi=_peco_ggi_list

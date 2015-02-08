@@ -176,3 +176,5 @@ function _peco_ggi_list () {
     fi
 }
 alias ggi=_peco_ggi_list
+
+export PATH=~/.local/bin:$PATH

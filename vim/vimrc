@@ -71,7 +71,7 @@ NeoBundle 'vim-scripts/sudo.vim'
 if has("win32") || has("win64")
     NeoBundle 'itchyny/lightline.vim'
 else
-    NeoBundle 'Lokaltog/powerline'
+    NeoBundle 'powerline/powerline'
 endif
 NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'

@@ -70,8 +70,6 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'vim-scripts/sudo.vim'
 if has("win32") || has("win64")
     NeoBundle 'itchyny/lightline.vim'
-else
-    NeoBundle 'powerline/powerline'
 endif
 NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'tsukkee/unite-help'
@@ -79,9 +77,6 @@ NeoBundle 'LeafCage/yankround.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mhinz/vim-startify'
-if has('python') || has('python3')
-    NeoBundle 'kakkyz81/evervim'
-endif
 NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'deton/imactivatemap.vim'
 NeoBundle 'justinmk/vim-dirvish'
@@ -244,3 +239,11 @@ endif
 
 " don't use auto SweetTrail
 let g:sweep_trail#enable = 1
+
+" Powerline
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+set laststatus=2 " Always display the statusline in all windows
+set showtabline=2 " Always display the tabline, even if there is only one tab
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)

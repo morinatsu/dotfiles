@@ -1,9 +1,3 @@
-set expandtab
-set textwidth=0
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set autoindent
 set backspace=indent,eol,start
 set incsearch
 set ignorecase
@@ -24,7 +18,7 @@ set nobackup
 set foldcolumn=4
 syntax on
 
-" reser autocmd
+" reset autocmd
 augroup myvimrc
     autocmd!
 augroup END

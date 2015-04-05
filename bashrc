@@ -123,7 +123,7 @@ fi
 # remake vimrc
 if [ -f ~/.vimrc ]; then
     rm ~/.vimrc
-    ln ~/dotfiles/vim/vimrc ~/.vimrc
+    ln -s ~/dotfiles/vim/vimrc ~/.vimrc
 fi
 
 # pythonz
@@ -158,3 +158,11 @@ function _peco_ggi_list () {
 alias ggi=_peco_ggi_list
 
 export PATH=~/.local/bin:$PATH
+
+function peco-hist() {
+    time_column=`echo $HISTTIMEFORMAT | awk '{printf("%s",NF)}'`
+    column=`expr $time_column + 3`
+    cmd=`history | tac | peco | sed -e 's/^ //' | sed -e 's/ +/ /g' | cut -d " " -f $column-`
+    history -s "$cmd"
+    eval $cmd
+}

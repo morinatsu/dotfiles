@@ -76,6 +76,7 @@ NeoBundle 'deton/imactivatemap.vim'
 NeoBundle 'justinmk/vim-dirvish'
 NeoBundle 'soramugi/auto-ctags.vim'
 NeoBundle 'tsukkee/unite-tag'
+NeoBundle 'PProvost/vim-ps1'
 
 filetype plugin on
 filetype indent on

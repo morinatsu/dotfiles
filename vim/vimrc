@@ -211,6 +211,9 @@ xmap gp <Plug>(yankround-gp)
 nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
+if has("win32") || has("win64")
+    let g:yankround_dir = expand('$HOME/vimfiles/yankround')
+endif
 
 " edit vimrc
 nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>

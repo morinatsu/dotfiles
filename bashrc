@@ -171,3 +171,17 @@ function peco-hist() {
     history -s "$cmd"
     eval $cmd
 }
+
+if ls --color=auto --show-control-char >/dev/null 2>&1;then
+  alias ls='ls --color=auto --show-control-char'
+  alias la='ls -A --color=auto --show-control-char'
+else
+  alias ls='ls --color=auto'
+  alias la='ls -A --color=auto'
+fi
+if [[ "$OSTYPE" =~ cygwin ]];then
+  export CYGWIN="winsymlinks $CYGWIN"
+fi
+if type -a busybox >& /dev/null;then
+  PROMPT_COMMAND=""
+fi

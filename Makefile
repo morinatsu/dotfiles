@@ -9,4 +9,5 @@ install-bash:
 install-vim:
 	rm -rf ~/.vim ~/.vimrc
 	ln -s `pwd`/vim ~/.vim
+	touch ./vim/vimrc_cred
 

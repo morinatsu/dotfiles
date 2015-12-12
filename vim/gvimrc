@@ -4,5 +4,5 @@ set nopaste
 if has("win32") || has("win64")
     set guifont=Migu_1M:h14
 else
-    set guifont=Migu\ 1M\ 12
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ 12,Migu\ 1M\ 12
 endif

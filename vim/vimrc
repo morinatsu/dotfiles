@@ -78,6 +78,7 @@ NeoBundle 'soramugi/auto-ctags.vim'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'PProvost/vim-ps1'
 NeoBundle 'chrisbra/Recover.vim'
+NeoBundle 'thinca/vim-zenspace'
 
 filetype plugin on
 filetype indent on

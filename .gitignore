@@ -5,3 +5,4 @@ vim/vimrc_cred
 *.un~
 byobu/.ssh-agent
 vim/yankround/
+vim/dein/

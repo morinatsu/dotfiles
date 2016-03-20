@@ -84,7 +84,9 @@ call dein#add('tsukkee/unite-tag')
 call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
+call dein#add('powerline/powerline', {'rtp': 'powerline/bindings/vim/'})
 call dein#end()
+
 
 filetype plugin on
 filetype indent on

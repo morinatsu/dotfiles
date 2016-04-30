@@ -182,6 +182,6 @@ fi
 if [[ "$OSTYPE" =~ cygwin ]];then
   export CYGWIN="winsymlinks $CYGWIN"
 fi
-if type -a busybox >& /dev/null;then
-  PROMPT_COMMAND=""
-fi
+#if type -a busybox >& /dev/null;then
+#  PROMPT_COMMAND=""
+#fi

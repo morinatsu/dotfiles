@@ -69,6 +69,8 @@ call dein#add('vim-jp/vimdoc-ja')
 call dein#add('vim-scripts/sudo.vim')
 if has("win32") || has("win64")
     call dein#add('itchyny/lightline.vim')
+else
+    call dein#add('powerline/powerline', {'rtp': 'powerline/bindings/vim/'})
 endif
 call dein#add('thinca/vim-guicolorscheme')
 call dein#add('tsukkee/unite-help')
@@ -84,7 +86,6 @@ call dein#add('tsukkee/unite-tag')
 call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
-call dein#add('powerline/powerline', {'rtp': 'powerline/bindings/vim/'})
 call dein#end()
 
 

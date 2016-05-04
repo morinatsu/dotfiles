@@ -185,3 +185,5 @@ fi
 #if type -a busybox >& /dev/null;then
 #  PROMPT_COMMAND=""
 #fi
+
+source "$HOME/.peco-anyenv/peco-anyenv.sh"

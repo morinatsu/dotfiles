@@ -2,6 +2,11 @@ MISC
 ====
 
 ```bash
+# log directory
+$ pushd /var/log
+```
+
+```bash
 # netstat
 $ netstat -lna -f inet
 ```

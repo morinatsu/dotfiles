@@ -21,9 +21,14 @@ syntax on
 " reset autocmd
 augroup myvimrc
     autocmd!
+    " Don't conceall double quote of json
+    autocmd Filetype json setlocal conceallevel=0
+    " Don't wrap in text file
+    autocmd FileType text setlocal textwidth=0
+    " Higllight trailing space
+    autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+    autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
-
-autocmd FileType text setlocal textwidth=0
 
 " for dein.vim
 if &compatible
@@ -70,11 +75,9 @@ else
 endif
 call dein#add('thinca/vim-guicolorscheme')
 call dein#add('tsukkee/unite-help')
-call dein#add('LeafCage/yankround.vim')
 call dein#add('h1mesuke/unite-outline')
 call dein#add('tpope/vim-fugitive')
 call dein#add('mhinz/vim-startify')
-call dein#add('scrooloose/syntastic.git')
 call dein#add('deton/imactivatemap.vim')
 call dein#add('justinmk/vim-dirvish')
 call dein#add('soramugi/auto-ctags.vim')
@@ -83,7 +86,6 @@ call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
 call dein#end()
-
 
 filetype plugin on
 filetype indent on
@@ -131,28 +133,6 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-e> neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() :
-""\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -165,15 +145,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\/\h\w*::'
-"let g;neocomplete#sources#omni#input_patterns.c = '[^.[:digit:]
-"*\t]\%(\.\/->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:]
-"*\t]\%(\.\/->\)\/\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " for snippets
 " Plugin key-mappings
@@ -202,31 +173,13 @@ else
     colorscheme default
 endif
 
-
 " disable IME, when exit insert mode
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
-
-" for Yankround.vim
-nmap p <Plug>(yankround-p)
-xmap p <Plug>(yankround-p)
-nmap P <Plug>(yankround-P)
-nmap gp <Plug>(yankround-gp)
-xmap gp <Plug>(yankround-gp)
-nmap gP <Plug>(yankround-gP)
-nmap <C-p> <Plug>(yankround-prev)
-nmap <C-n> <Plug>(yankround-next)
-if has("win32") || has("win64")
-    let g:yankround_dir = expand('$HOME/vimfiles/yankround')
-endif
 
 " edit vimrc
 nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>source $MYVIMRC<CR>
                  \ :source $MYGVIMRC<CR>
-
-" 行末スペースをハイライトで可視化する
-autocmd myvimrc VimEnter,WinEnter *
-\ match Error /s+$/
 
 " カーソルキーがABCDにならないようにする
 noremap OA <Up>
@@ -269,6 +222,3 @@ let g:auto_ctags = 1
 let g:auto_ctags_tags_name = '.tags'
 set tags=.tags;
 let g:auto_ctags_directory_list = ['.git']
-
-" Don't conceall double quote of json
-autocmd Filetype json setl conceallevel=0

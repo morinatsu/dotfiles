@@ -187,9 +187,6 @@ else
     source ~/.vim/vimrc_cred
 endif
 
-" don't use auto SweetTrail
-let g:sweep_trail#enable = 1
-
 " Powerline
 if !has("win32") && !has("win64")
     if has("python3")

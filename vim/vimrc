@@ -3,14 +3,10 @@ set incsearch
 set ignorecase
 set ruler
 set wildmenu
-set commentstring=\ #\ %s
 set foldlevel=0
 set clipboard+=unnamed
 set number
 set laststatus=2
-if has("win32")
-    set termencoding=sjis
-endif
 set encoding=utf-8
 set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
 set nobackup

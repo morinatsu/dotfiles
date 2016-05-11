@@ -180,12 +180,6 @@ nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>source $MYVIMRC<CR>
                  \ :source $MYGVIMRC<CR>
 
-" カーソルキーがABCDにならないようにする
-noremap OA <Up>
-noremap OB <Down>
-noremap OC <Right>
-noremap OD <Left>
-
 " sorce credential file
 if has("win32") || has("win64")
     source $HOME\vimfiles\vimrc_cred

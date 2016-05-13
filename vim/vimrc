@@ -1,16 +1,42 @@
+" use backspace as backspace
 set backspace=indent,eol,start
+
+" incremental search
 set incsearch
+
+" ignore case on search
 set ignorecase
+
+" use ruler
 set ruler
+
+" command line completion
 set wildmenu
+
+" close all fold
 set foldlevel=0
+
+" use system clipboard
 set clipboard+=unnamed
+
+" display line number
 set number
+
+" display status line always
 set laststatus=2
+
+" internal encoding
 set encoding=utf-8
+
+" list of encoding to try on file reading
 set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
+
+" don't backup
 set nobackup
+
+" width of foldcolumn
 set foldcolumn=4
+
 syntax on
 
 " reset autocmd

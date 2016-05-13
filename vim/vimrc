@@ -42,11 +42,11 @@ syntax on
 " reset autocmd
 augroup myvimrc
     autocmd!
-    " Don't conceall double quote of json
+    " Don't conceal double quote of json
     autocmd Filetype json setlocal conceallevel=0
     " Don't wrap in text file
     autocmd FileType text setlocal textwidth=0
-    " Higllight trailing space
+    " Highlight trailing space
     autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
     autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
@@ -199,7 +199,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Enable heavy omni cpmpletion.
+" Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
@@ -239,7 +239,7 @@ nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>source $MYVIMRC<CR>
                  \ :source $MYGVIMRC<CR>
 
-" sorce credential file
+" source credential file
 if has("win32") || has("win64")
     source $HOME\vimfiles\vimrc_cred
 else

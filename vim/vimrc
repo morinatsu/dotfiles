@@ -39,19 +39,18 @@ set foldcolumn=4
 
 syntax on
 
-" reset autocmd
 augroup myvimrc
     autocmd!
+    " Highlight trailing space
+    autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+    autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
     " Don't conceal double quote of json
     autocmd Filetype json setlocal conceallevel=0
     " Don't wrap in text file
     autocmd FileType text setlocal textwidth=0
-    " Highlight trailing space
-    autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
-    autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-" text base tabpage
+" text base tabpage: "{{{
 set showtabline=2
 set guioptions-=e
 function! s:tabpage_label(n)
@@ -87,8 +86,9 @@ function! MakeTabLine()
     return tabpages . '%=' . info
 endfunction
 set tabline=%!MakeTabLine()
+"}}}
 
-" for dein.vim
+" for dein.vim: "{{{
 if &compatible
   set nocompatible
 endif
@@ -105,6 +105,7 @@ if has('vim_starting')
         set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
     endif
 endif
+"}}}
 
 if has("win32") || has("win64")
     call dein#begin(expand('$HOME/vimfiles/dein'))
@@ -148,6 +149,7 @@ call dein#end()
 filetype plugin on
 filetype indent on
 
+" NeoComplete : "{{{
 "Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -203,8 +205,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
+"}}}
 
-" for snippets
+" NeoSnippet : "{{{
 " Plugin key-mappings
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -222,6 +225,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
+"}}}
 
 " for solarized
 if has('gui_running')
@@ -246,7 +250,7 @@ else
     source ~/.vim/vimrc_cred
 endif
 
-" Powerline
+" Powerline "{{{
 if !has("win32") && !has("win64")
     if has("python3")
         python3 from powerline.vim import setup as powerline_setup
@@ -265,9 +269,13 @@ if !has("win32") && !has("win64")
         set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
     endif
 endif
+"}}}
 
-" auto-ctags.vim
+" auto-ctags.vim "{{{
 let g:auto_ctags = 1
 let g:auto_ctags_tags_name = '.tags'
 set tags=.tags;
 let g:auto_ctags_directory_list = ['.git']
+"}}}
+
+" vim: foldmethod=marker

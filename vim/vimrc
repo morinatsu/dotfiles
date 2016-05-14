@@ -146,6 +146,8 @@ call dein#add('tsukkee/unite-tag')
 call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
+call dein#add('thinca/vim-quickrun')
+call dein#add('tyru/open-browser.vim')
 call dein#end()
 
 filetype plugin on
@@ -279,6 +281,15 @@ let g:auto_ctags_tags_name = 'tags'
 let g:auto_ctags_directory_list = ['.git']
 let g:auto_ctags_tags_args = '--tag-relative --recurse --sort=yes'
 set tags=.git/tags;
+"}}}
+
+" MarkDown preview with quickrun "{{{
+let g:quickrun_config = {}
+let g:quickrun_config.mkd = {
+            \ 'outputter' : 'browser',
+            \   'command': 'pandoc',
+            \   'exec': '%c --from=markdown --to=html %o %s %a',
+            \ }
 "}}}
 
 " vim: foldmethod=marker

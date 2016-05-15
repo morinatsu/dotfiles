@@ -37,6 +37,9 @@ set nobackup
 " width of foldcolumn
 set foldcolumn=4
 
+" use modeline
+set modeline
+
 syntax on
 
 let s:is_windows = has('win32') || has('win64')

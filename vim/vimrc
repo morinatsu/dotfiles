@@ -152,6 +152,7 @@ call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tyru/open-browser.vim')
+call dein#add('mattn/benchvimrc-vim')
 call dein#end()
 
 filetype plugin on

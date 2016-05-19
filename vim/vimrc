@@ -158,6 +158,19 @@ call dein#end()
 filetype plugin on
 filetype indent on
 
+" Ok, a vim for men, get off the cursor keys {{{
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" }}}
+
 " NeoComplete : "{{{
 "Disable AutoComplPop.
 let g:acp_enableAtStartup = 0

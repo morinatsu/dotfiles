@@ -20,4 +20,6 @@ $ sudo aptitude purge linux-image-?.?.?-??-generic linux-image-extra-?.?.?-??-ge
 ```bash
 # ansible
 $ ansible-playbook playbook.yml -i ./hosts -C --ask-vault-pass
+$ ansible-playbook playbook.yml -i ./hosts -C --ask-become-pass
+
 ```

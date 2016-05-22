@@ -152,6 +152,7 @@ call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tyru/open-browser.vim')
+call dein#add('HybridText')
 call dein#end()
 
 filetype plugin on
@@ -295,5 +296,8 @@ let g:quickrun_config.mkd = {
             \   'exec': '%c --from=markdown --to=html %o %s %a',
             \ }
 "}}}
+
+" Use HybridText for undefined filetype
+autocmd BufEnter * if &filetype == "" | setlocal ft=hybrid | endif
 
 " vim: foldmethod=marker

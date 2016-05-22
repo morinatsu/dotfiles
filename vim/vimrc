@@ -153,10 +153,24 @@ call dein#add('thinca/vim-zenspace')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tyru/open-browser.vim')
 call dein#add('HybridText')
+call dein#add('mattn/benchvimrc-vim')
 call dein#end()
 
 filetype plugin on
 filetype indent on
+
+" Ok, a vim for men, get off the cursor keys {{{
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" }}}
 
 " NeoComplete : "{{{
 "Disable AutoComplPop.

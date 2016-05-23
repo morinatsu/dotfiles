@@ -186,4 +186,6 @@ fi
 #  PROMPT_COMMAND=""
 #fi
 
-source "$HOME/.peco-anyenv/peco-anyenv.sh"
+if [ -f "$HOME/.peco-anyenv/peco-anyenv.sh" ]; then
+  source "$HOME/.peco-anyenv/peco-anyenv.sh"
+fi

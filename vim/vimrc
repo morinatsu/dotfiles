@@ -29,7 +29,7 @@ set laststatus=2
 set encoding=utf-8
 
 " list of encoding to try on file reading
-set fileencodings=iso-2022-jp,sjis,utf-8,euc-jp
+set fileencodings=iso-2022-jp,sjis,ucs-bom,utf-8,euc-jp
 
 " don't backup
 set nobackup

@@ -152,6 +152,7 @@ call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tyru/open-browser.vim')
+call dein#add('HybridText')
 call dein#add('mattn/benchvimrc-vim')
 call dein#end()
 
@@ -312,7 +313,10 @@ let g:quickrun_config.mkd = {
 
 " keymap for Unite-vim "{{{
 nnoremap <Space> <nop>
-nnoremap <Space>u :<C-u>Unite 
+nnoremap <Space>u :<C-u>Unite<Space>
 " }}}
+
+" Use HybridText for undefined filetype
+autocmd BufEnter * if &filetype == "" | setlocal ft=hybrid | endif
 
 " vim: foldmethod=marker

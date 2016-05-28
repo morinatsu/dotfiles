@@ -137,7 +137,7 @@ if s:is_windows
     call dein#add('itchyny/lightline.vim')
 endif
 call dein#add('thinca/vim-guicolorscheme')
-call dein#add('tsukkee/unite-help')
+call dein#add('Shougo/unite-help')
 call dein#add('h1mesuke/unite-outline')
 call dein#add('tpope/vim-fugitive')
 call dein#add('mhinz/vim-startify')

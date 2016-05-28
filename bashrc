@@ -138,7 +138,7 @@ fi
 export BYOBU_BACKEND=tmux
 
 # powerline
-POWERLINE_ROOT="/usr/local/lib/python3.4/dist-packages/powerline/"
+POWERLINE_ROOT="/usr/local/lib/python3.5/dist-packages/powerline/"
 if [ ! -d "$POWERLINE_ROOT" ]; then
     POWERLINE_ROOT="/usr/local/lib/python2.7/dist-packages/powerline/"
 fi

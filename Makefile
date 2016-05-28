@@ -1,5 +1,4 @@
-install: install-bash install-vim install-powerline install-byobu
-
+install: install-bash install-vim install-powerline install-byobu 
 install-bash:
 	rm -f ~/.bashrc
 	ln -s `pwd`/bashrc ~/.bashrc

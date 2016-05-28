@@ -19,4 +19,6 @@ install-vim:
 	rm -rf ~/.vim ~/.vimrc
 	ln -s `pwd`/vim ~/.vim
 	touch ./vim/vimrc_cred
-
+	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ./installer.sh
+	sh ./installer.sh `pwd`/vim/dein/repos
+	rm -f ./installer.sh

@@ -11,6 +11,7 @@ install-byobu:
 	ln -s `pwd`/byobu ~/.byobu
 
 install-powerline:
+	mkdir ~/.config
 	rm -f ~/.config/powerline
 	ln -s `pwd`/powerline ~/.config/powerline
 

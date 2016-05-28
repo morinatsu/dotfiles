@@ -250,13 +250,14 @@ if has('conceal')
 endif
 "}}}
 
-" for solarized
+" for solarized "{{{
 if has('gui_running')
     set background=light
     colorscheme solarized
 else
     colorscheme default
 endif
+"}}}
 
 " disable IME, when exit insert mode
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
@@ -266,12 +267,13 @@ nnoremap <F5> :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>source $MYVIMRC<CR>
                  \ :source $MYGVIMRC<CR>
 
-" source credential file
+" source credential file "{{{
 if s:is_windows
     source $HOME\vimfiles\vimrc_cred
 else
     source ~/.vim/vimrc_cred
 endif
+"}}}
 
 " Powerline "{{{
 if !s:is_windows

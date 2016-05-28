@@ -326,4 +326,9 @@ let g:startify_skiplist = [
             \ ]
 "}}}
 
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <C-L> :nohlsearch<CR><C-L>
+endif
+
 " vim: foldmethod=marker

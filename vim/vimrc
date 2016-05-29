@@ -143,6 +143,7 @@ call dein#add('HybridText')
 call dein#add('mattn/benchvimrc-vim')
 call dein#add('osyo-manga/vim-reanimate')
 call dein#add('easymotion/vim-easymotion')
+call dein#add('osyo-manga/vim-over')
 call dein#end()
 
 filetype plugin on

@@ -321,4 +321,8 @@ if maparg('<C-l>', 'n') ==# ''
   nnoremap <C-l> :<C-u>nohlsearch<CR>
 endif
 
+" move tabpages
+nnoremap <silent> ]t :<C-u>tabnext<CR>
+nnoremap <silent> [t :<C-u>tabprevious<CR>
+
 " vim: foldmethod=marker

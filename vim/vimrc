@@ -1,46 +1,35 @@
-" use backspace as backspace
-set backspace=indent,eol,start
+"  encoding setting "{{{
+set encoding=utf-8      " internal encoding
+scriptencoding utf-8    " encoding of script
+set fileencodings=iso-2022-jp,sjis,ucs-bom,utf-8,euc-jp    " list of encoding to try on file reading
+"}}}
 
-" incremental search
-set incsearch
+"  serching setting "{{{
+set backspace=indent,eol,start    " use backspace as backspace
+set incsearch                     " incremental search
+set ignorecase                    " ignore case on search
+"}}}
 
-" ignore case on search
-set ignorecase
+" display of location "{{{
+set ruler           " use ruler
+set number          " display line number
+set laststatus=2    " display status line always
+"}}}
 
-" use ruler
-set ruler
+" folding "{{{
+set foldlevel=0     " close all fold
+set foldcolumn=4    " width of foldcolumn
+"}}}
 
-" command line completion
-set wildmenu
+set wildmenu    " command line completion
 
-" close all fold
-set foldlevel=0
+set clipboard+=unnamed    " use system clipboard
 
-" use system clipboard
-set clipboard+=unnamed
+set nobackup    " don't backup
 
-" display line number
-set number
+set modeline    " use modeline
 
-" display status line always
-set laststatus=2
-
-" internal encoding
-set encoding=utf-8
-
-" list of encoding to try on file reading
-set fileencodings=iso-2022-jp,sjis,ucs-bom,utf-8,euc-jp
-
-" don't backup
-set nobackup
-
-" width of foldcolumn
-set foldcolumn=4
-
-" use modeline
-set modeline
-
-syntax on
+syntax enable
 
 let s:is_windows = has('win32') || has('win64')
 

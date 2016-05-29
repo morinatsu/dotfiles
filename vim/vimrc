@@ -150,7 +150,6 @@ filetype plugin on
 filetype indent on
 
 " Ok, a vim for men, get off the cursor keys {{{
-
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -159,11 +158,10 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-
 " }}}
 
 " NeoComplete : "{{{
-"Disable AutoComplPop.
+" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -318,9 +316,9 @@ let g:startify_skiplist = [
             \ ]
 "}}}
 
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <C-L> :nohlsearch<CR><C-L>
+" Use <C-l> to clear the highlighting of :set hlsearch.
+if maparg('<C-l>', 'n') ==# ''
+  nnoremap <C-l> :<C-u>nohlsearch<CR>
 endif
 
 " vim: foldmethod=marker

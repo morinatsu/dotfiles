@@ -82,69 +82,92 @@ endfunction
 set tabline=%!MakeTabLine()
 "}}}
 
-" for dein.vim: "{{{
+" for windows "{{{
+if has('vim_starting')
+    if s:is_windows
+        set shellpipe=
+        set undodir=$TEMP/
+        set directory=$TEMP/
+    endif
+endif
+"}}}
+
+" Shougo/dein.vim: "{{{
 if &compatible
     set nocompatible
 endif
 filetype off
 let g:neobundle_default_git_protocol='git'
-
 if has('vim_starting')
     if s:is_windows
-        set shellpipe=
         set runtimepath+=$HOME/vimfiles/dein/repos/github.com/Shougo/dein.vim
-        set undodir=$TEMP/
-        set directory=$TEMP/
     else
         set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
     endif
 endif
-"}}}
-
 if s:is_windows
     call dein#begin(expand('$HOME/vimfiles/dein'))
 else
     call dein#begin(expand('~/.vim/dein'))
 endif
 call dein#add('Shougo/dein.vim')
+"}}}
+
+" Shougo/vimproc.vim "{{{
 if s:is_windows
     call dein#add('Shougo/vimproc.vim', {'build': 'tools\\update-dll-mingw'})
 else
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 endif
+"}}}
+
+" Shogo/unite.vim and sources "{{{
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/unite-help')
+call dein#add('h1mesuke/unite-outline')
+call dein#add('tsukkee/unite-tag')
+"}}}
+
+" colorschemes "{{{
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('thinca/vim-guicolorscheme')
+"}}}
+
+" for Vim itself "{{{
+call dein#add('thinca/vim-scouter')
+call dein#add('mattn/benchvimrc-vim')
+"}}}
+
+" git "{{{
+call dein#add('tpope/vim-fugitive')
+call dein#add('rhysd/committia.vim')
+"}}}
+
 call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
+
 call dein#add('Konfekt/FastFold')
-call dein#add('thinca/vim-scouter')
-call dein#add('altercation/vim-colors-solarized')
+
 call dein#add('vim-jp/vital.vim')
-call dein#add('Shougo/unite.vim')
 call dein#add('vim-jp/vimdoc-ja')
 call dein#add('vim-scripts/sudo.vim')
 if s:is_windows
     call dein#add('itchyny/lightline.vim')
 endif
-call dein#add('thinca/vim-guicolorscheme')
-call dein#add('Shougo/unite-help')
-call dein#add('h1mesuke/unite-outline')
-call dein#add('tpope/vim-fugitive')
 call dein#add('mhinz/vim-startify')
 call dein#add('deton/imactivatemap.vim')
 call dein#add('justinmk/vim-dirvish')
 call dein#add('soramugi/auto-ctags.vim')
-call dein#add('tsukkee/unite-tag')
 call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tyru/open-browser.vim')
 call dein#add('HybridText')
-call dein#add('mattn/benchvimrc-vim')
 call dein#add('osyo-manga/vim-reanimate')
 call dein#add('easymotion/vim-easymotion')
 call dein#add('osyo-manga/vim-over')
-call dein#add('rhysd/committia.vim')
 call dein#end()
 
 filetype plugin on

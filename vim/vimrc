@@ -336,6 +336,7 @@ nnoremap <Space>u :<C-u>Unite<Space>
 let g:startify_skiplist = [
             \ 'COMMIT_EDITMSG',
             \ 'dein/.*/doc',
+            \ escape('dein\.*\doc','\'),
             \ ]
 "}}}
 

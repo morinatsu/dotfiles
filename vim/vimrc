@@ -360,6 +360,10 @@ endif
 nnoremap <silent> ]t :<C-u>tabnext<CR>
 nnoremap <silent> [t :<C-u>tabprevious<CR>
 
+" move quickfix
+nnoremap <silent> ]c :<C-u>cnext<CR>
+nnoremap <silent> [c :<C-u>cprevious<CR>
+
 " Help in new tabs: (original) unegunn/dotfiles "{{{
 function! s:helptab()
   if &buftype == 'help'

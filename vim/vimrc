@@ -160,7 +160,7 @@ endif
 call dein#add('mhinz/vim-startify')
 call dein#add('deton/imactivatemap.vim')
 call dein#add('justinmk/vim-dirvish')
-call dein#add('soramugi/auto-ctags.vim')
+call dein#add('soramugi/auto-ctags.vim') " TODO: make this works
 call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
@@ -173,6 +173,8 @@ call dein#add('osyo-manga/vim-over')
 call dein#add('airblade/vim-rooter')
 call dein#add('tpope/vim-abolish')
 call dein#add('nelstrom/vim-qargs')
+" call dein#add('morinatsu/vim-howdoi')
+call dein#add('/home/morinatsu/projects/vim-howdoi') "TODO make this works
 call dein#end()
 
 filetype plugin on

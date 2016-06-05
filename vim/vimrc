@@ -78,7 +78,7 @@ function! MakeTabLine()
     let sep = ' | '
     let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
     let info = ''
-    let info .= fnamemodify(getcwd(), ":~") . ' '
+    let info .= fnamemodify(getcwd(), ':~') . ' '
     return tabpages . '%=' . info
 endfunction
 set tabline=%!MakeTabLine()
@@ -95,9 +95,6 @@ endif
 "}}}
 
 " Shougo/dein.vim: "{{{
-if &compatible
-    set nocompatible
-endif
 filetype off
 let g:neobundle_default_git_protocol='git'
 if has('vim_starting')
@@ -237,11 +234,14 @@ inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-e> neocomplete#cancel_popup()
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup omni
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -296,7 +296,7 @@ endif
 
 " Powerline "{{{
 if !s:is_windows
-    if has("python3")
+    if has('python3')
         python3 from powerline.vim import setup as powerline_setup
         python3 powerline_setup()
         python3 del powerline_setup
@@ -305,7 +305,7 @@ if !s:is_windows
         set showtabline=2 " Always display the tabline, even if there is only one tab
         set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
     endif
-    if has("python")
+    if has('python')
         python from powerline.vim import setup as powerline_setup
         python powerline_setup()
         python del powerline_setup
@@ -366,7 +366,7 @@ nnoremap <silent> [c :<C-u>cprevious<CR>
 
 " Help in new tabs: (original) unegunn/dotfiles "{{{
 function! s:helptab()
-  if &buftype == 'help'
+  if &buftype ==? 'help'
     execute "normal! \<C-w>T"
     nnoremap <buffer> q :q<CR>
   endif

@@ -172,8 +172,10 @@ call dein#add('osyo-manga/vim-over')
 call dein#add('airblade/vim-rooter')
 call dein#add('tpope/vim-abolish')
 call dein#add('nelstrom/vim-qargs')
-" call dein#add('morinatsu/vim-howdoi')
-call dein#add('/home/morinatsu/projects/vim-howdoi') "TODO make this works
+if !s:is_windows
+    " call dein#add('morinatsu/vim-howdoi')
+    call dein#add('/home/morinatsu/projects/vim-howdoi') "TODO make this works
+endif
 call dein#add('thinca/vim-fontzoom')
 call dein#add('deton/jasegment.vim')
 call dein#add('osyo-manga/shabadou.vim')

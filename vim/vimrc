@@ -176,7 +176,7 @@ if !s:is_windows
     if has('python3')
         call dein#add('morinatsu/vim-howdoi')
     elseif has('python')
-        call dein#add('laurentgoudet/vim-howdoi')
+        call dein#add('isovector/vim-howdoi')
     endif
 endif
 call dein#add('thinca/vim-fontzoom')

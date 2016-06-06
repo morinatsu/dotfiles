@@ -173,8 +173,11 @@ call dein#add('airblade/vim-rooter')
 call dein#add('tpope/vim-abolish')
 call dein#add('nelstrom/vim-qargs')
 if !s:is_windows
-    " call dein#add('morinatsu/vim-howdoi')
-    call dein#add('/home/morinatsu/projects/vim-howdoi') "TODO make this works
+    if has('python3')
+        call dein#add('morinatsu/vim-howdoi')
+    elseif has('python')
+        call dein#add('laurentgoudet/vim-howdoi')
+    endif
 endif
 call dein#add('thinca/vim-fontzoom')
 call dein#add('deton/jasegment.vim')

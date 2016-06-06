@@ -388,7 +388,8 @@ augroup END
 " jasegment
 let g:jasegment#highlight = 1
 
-" VimScript checker (vint & watchdogs)
+" VimScript checker (vint & watchdogs) "{{{
+" TODO: why can't I see running mark?
 let g:quickrun_config = {
 \   '_' : {
 \       'outputter/buffer/running_mark' : '---->---->---->---->',
@@ -410,5 +411,6 @@ augroup vint
 augroup END
 " open quickfix window if exists error
 call watchdogs#setup(g:quickrun_config)
+"}}}
 
 " vim: foldmethod=marker tabstop=4 shiftwidth=4 expandtab

@@ -415,4 +415,7 @@ call watchdogs#setup(g:quickrun_config)
 " gundo.vim
 nnoremap <F7> :GundoToggle<CR>
 
+" vim-howdoi
+map <Space>h <Plug>Howdoi
+
 " vim: foldmethod=marker tabstop=4 shiftwidth=4 expandtab

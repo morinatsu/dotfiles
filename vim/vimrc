@@ -172,12 +172,10 @@ call dein#add('osyo-manga/vim-over')
 call dein#add('airblade/vim-rooter')
 call dein#add('tpope/vim-abolish')
 call dein#add('nelstrom/vim-qargs')
-if !s:is_windows
-    if has('python3')
-        call dein#add('morinatsu/vim-howdoi')
-    elseif has('python')
-        call dein#add('isovector/vim-howdoi')
-    endif
+if has('python3')
+    call dein#add('morinatsu/vim-howdoi')
+elseif has('python')
+    call dein#add('isovector/vim-howdoi')
 endif
 call dein#add('thinca/vim-fontzoom')
 call dein#add('deton/jasegment.vim')

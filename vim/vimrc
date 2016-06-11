@@ -414,6 +414,9 @@ call watchdogs#setup(g:quickrun_config)
 
 " gundo.vim
 nnoremap <F7> :GundoToggle<CR>
+if has('python3')
+    let g:gundo_prefer_python3 = 1
+endif
 
 " vim-howdoi
 map <Space>h <Plug>Howdoi

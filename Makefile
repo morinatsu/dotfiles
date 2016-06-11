@@ -1,4 +1,4 @@
-install: install-bash install-vim install-powerline install-byobu 
+install: install-bash install-vim install-powerline install-byobu
 install-bash:
 	rm -f ~/.bashrc
 	ln -s `pwd`/bashrc ~/.bashrc
@@ -15,9 +15,17 @@ install-powerline:
 	ln -s `pwd`/powerline ~/.config/powerline
 
 install-vim:
-	rm -rf ~/.vim ~/.vimrc
-	ln -s `pwd`/vim ~/.vim
-	touch ./vim/vimrc_cred
+	ifeq ($(OS),Windows_NT)
+		VIMDIR = vimfiles
+		VIMRC = vimrc
+		GVIMRC = gvimrc
+	else
+		VIMDIR = .vim
+		VIMRC = vimrc
+		GVIMRC = gvimrc
+	endif
+	rm -rf ~/$(VIMDIR)
+	ln -s `pwd`/vim ~/$(VIMDIR)
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ./installer.sh
 	sh ./installer.sh `pwd`/vim/dein
 	rm -f ./installer.sh

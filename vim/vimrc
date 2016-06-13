@@ -22,11 +22,8 @@ set foldcolumn=4    " width of foldcolumn
 "}}}
 
 set wildmenu    " command line completion
-
 set clipboard+=unnamed    " use system clipboard
-
 set nobackup    " don't backup
-
 set modeline    " use modeline
 
 syntax enable
@@ -420,5 +417,8 @@ endif
 
 " vim-howdoi
 map <Space>h <Plug>Howdoi
+
+" vim-reanimate
+let g:reanimate_save_dir = $HOME . '/.local/reanimate/save_dir'
 
 " vim: foldmethod=marker tabstop=4 shiftwidth=4 expandtab

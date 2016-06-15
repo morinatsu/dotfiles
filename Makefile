@@ -19,13 +19,16 @@ install-vim:
 		VIMDIR = vimfiles
 		VIMRC = vimrc
 		GVIMRC = gvimrc
+		UNDODIR = .local/undodir
 	else
 		VIMDIR = .vim
 		VIMRC = vimrc
 		GVIMRC = gvimrc
+		UNDODIR = .local/undodir
 	endif
 	rm -rf ~/$(VIMDIR)
 	ln -s `pwd`/vim ~/$(VIMDIR)
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ./installer.sh
 	sh ./installer.sh `pwd`/vim/dein
 	rm -f ./installer.sh
+	mkdir $(UNDODIR)

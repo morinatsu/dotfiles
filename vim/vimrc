@@ -25,6 +25,7 @@ set wildmenu    " command line completion
 set clipboard+=unnamed    " use system clipboard
 set nobackup    " don't backup
 set modeline    " use modeline
+set undofile    " use undofile
 
 syntax enable
 
@@ -85,7 +86,6 @@ set tabline=%!MakeTabLine()
 if has('vim_starting')
     if s:is_windows
         set shellpipe=
-        set undodir=$TEMP/
         set directory=$TEMP/
     endif
 endif
@@ -380,6 +380,8 @@ augroup vimrc_help
   autocmd BufEnter *.jax call s:helptab()
 augroup END
 "}}}
+
+set undodir=$HOME/.local/undodir
 
 " jasegment
 let g:jasegment#highlight = 1

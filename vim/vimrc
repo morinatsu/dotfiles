@@ -96,9 +96,9 @@ filetype off
 let g:neobundle_default_git_protocol='git'
 if has('vim_starting')
     if s:is_windows
-        set runtimepath+=$HOME/vimfiles/dein/repos/github.com/Shougo/dein.vim
+        set runtimepath^=$HOME/vimfiles/dein/repos/github.com/Shougo/dein.vim
     else
-        set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+        set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
     endif
 endif
 if s:is_windows

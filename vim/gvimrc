@@ -7,3 +7,4 @@ else
     set guifont=Source\ Code\ Pro\ for\ Powerline\ 12,Migu\ 1M\ 12
 endif
 set columns=120
+set guioptions-=T

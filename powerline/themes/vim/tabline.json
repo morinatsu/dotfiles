@@ -75,18 +75,9 @@
 		],
 		"right": [
 			{
-				"type": "string",
-				"contents": "Bufs",
-				"name": "single_tab",
-				"highlight_groups": ["single_tab"],
-				"include_function": "single_tab"
-			},
-			{
-				"type": "string",
-				"contents": "Tabs",
-				"name": "many_tabs",
-				"highlight_groups": ["many_tabs"],
-				"exclude_function": "single_tab"
+				"type": "function",
+				"name": "cwd",
+				"function": "powerline.segments.common.env.cwd"
 			}
 		]
 	}

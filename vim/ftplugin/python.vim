@@ -8,6 +8,7 @@ setlocal expandtab          " タブをスペースに置換
 setlocal shiftwidth=4       " インデント幅
 setlocal softtabstop=4      " <tab>, <BS>時の幅
 setlocal smarttab           " 行頭で<TAB>した時にshiftwidthでインデント
+setlocal colorcolumn=72
 
 nmap <C-l> >>
 nmap <C-h> <<

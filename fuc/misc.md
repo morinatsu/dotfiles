@@ -23,3 +23,8 @@ $ ansible-playbook playbook.yml -i ./hosts -C --ask-vault-pass
 $ ansible-playbook playbook.yml -i ./hosts -C --ask-become-pass
 
 ```
+
+```vim
+# vim for debug
+$ vim -N -u ~/projects/min-vimrc/vimrc -U NONE -i NONE --noplugin
+'''

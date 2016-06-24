@@ -111,7 +111,8 @@ call dein#add('Shougo/dein.vim')
 
 " Shougo/vimproc.vim "{{{
 if s:is_windows
-    call dein#add('Shougo/vimproc.vim', {'build': 'tools\\update-dll-mingw'})
+    let g:vimproc#download_windows_dll = 1
+    call dein#add('Shougo/vimproc.vim')
 else
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 endif

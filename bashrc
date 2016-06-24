@@ -189,3 +189,5 @@ fi
 if [ -f "$HOME/.peco-anyenv/peco-anyenv.sh" ]; then
   source "$HOME/.peco-anyenv/peco-anyenv.sh"
 fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

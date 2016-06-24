@@ -175,6 +175,7 @@ call dein#add('osyo-manga/shabadou.vim')
 call dein#add('osyo-manga/vim-watchdogs')
 call dein#add('sjl/gundo.vim')
 call dein#add('haya14busa/incsearch.vim')
+call dein#add('kana/vim-vspec')
 call dein#end()
 
 filetype plugin on

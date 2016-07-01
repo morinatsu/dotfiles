@@ -1,4 +1,4 @@
-install: install-bash install-vim install-powerline install-byobu
+install: install-bash install-vim install-powerline install-byobu install-textlint
 install-bash:
 	rm -f ~/.bashrc
 	ln -s `pwd`/bashrc ~/.bashrc
@@ -32,3 +32,8 @@ install-vim:
 	sh ./installer.sh `pwd`/vim/dein
 	rm -f ./installer.sh
 	mkdir $(UNDODIR)
+
+install-textlint:
+	rm -f ~/.textlintrc
+	ln -s `pwd`/textlintrc ~/.textlintrc
+

@@ -6,5 +6,10 @@
     "spellcheck-tech-word": true,
     "no-mix-dearu-desumasu": true,
     "preset-jtf-style": true,
+    "prh": {
+      "rulePaths": [
+        "./prh.yml"
+      ]
+    }
   }
 }

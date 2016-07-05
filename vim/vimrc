@@ -155,11 +155,7 @@ endif
 call dein#add('mhinz/vim-startify')
 call dein#add('deton/imactivatemap.vim')
 call dein#add('justinmk/vim-dirvish')
-if !s:is_windows
-    call dein#add('soramugi/auto-ctags.vim')  " doesn't work on windows
-else
-    call dein#add('morinatsu/auto-ctags.vim')
-endif
+call dein#add('morinatsu/auto-ctags.vim')
 call dein#add('PProvost/vim-ps1')
 call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')

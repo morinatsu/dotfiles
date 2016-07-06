@@ -102,6 +102,7 @@ if has('vim_starting')
     endif
 endif
 if s:is_windows
+    let g:vimproc#download_windows_dll = 1
     call dein#begin(expand('$HOME/vimfiles/dein'))
 else
     call dein#begin(expand('~/.vim/dein'))
@@ -111,7 +112,6 @@ call dein#add('Shougo/dein.vim')
 
 " Shougo/vimproc.vim "{{{
 if s:is_windows
-    let g:vimproc#download_windows_dll = 1
     call dein#add('Shougo/vimproc.vim')
 else
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})

@@ -96,10 +96,15 @@ filetype off
 let g:neobundle_default_git_protocol='git'
 if has('vim_starting')
     if s:is_windows
-        set runtimepath^=$HOME/vimfiles/dein/repos/github.com/Shougo/dein.vim
+        let s:path_to_dein = '$HOME/vimfiles/dein/repos/github.com/Shougo/dein.vim'
     else
-        set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
+        let s:path_to_dein = '~/.vim/dein/repos/github.com/Shougo/dein.vim'
     endif
+    if !isdirectory(expand(s:path_to_dein))
+        echo 'install dein.vim ...'
+        call system('git clone git://github.com/Shougo/dein.vim ' . expand(s:path_to_dein))
+    endif
+    let &runtimepath = s:path_to_dein . ',' . &runtimepath
 endif
 if s:is_windows
     let g:vimproc#download_windows_dll = 1

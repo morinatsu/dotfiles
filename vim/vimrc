@@ -289,9 +289,12 @@ nnoremap <F6> :<C-u>source $MYVIMRC<CR>
 
 " source credential file "{{{
 if s:is_windows
-    source $HOME\vimfiles\vimrc_cred
+    let s:credential = expand('$HOME\vimfiles\vimrc_cred')
 else
-    source ~/.vim/vimrc_cred
+    let s:credential = expand('~/.vim/vimrc_cred')
+endif
+if filereadable(s:credential)
+    source s:credential
 endif
 "}}}
 

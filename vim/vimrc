@@ -299,7 +299,7 @@ else
     let s:credential = expand('~/.vim/vimrc_cred')
 endif
 if filereadable(s:credential)
-    source s:credential
+    execute 'source ' . s:credential
 endif
 "}}}
 

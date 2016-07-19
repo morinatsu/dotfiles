@@ -20,9 +20,13 @@ install-bash:
 install-byobu:
 	rm -rf ~/.byobu
 	ln -s `pwd`/byobu ~/.byobu
+	rm -rf ~/.fuc
+	ln -s `pwd`/fuc ~/.fuc
 
 install-powerline:
-	mkdir -f ~/.config
+	@if [ ! -d ~/.config ]; then \
+	    mkdir -f ~/.config; \
+	fi
 	rm -f ~/.config/powerline
 	ln -s `pwd`/powerline ~/.config/powerline
 

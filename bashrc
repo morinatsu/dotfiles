@@ -182,9 +182,11 @@ fi
 if [[ "$OSTYPE" =~ cygwin ]];then
   export CYGWIN="winsymlinks $CYGWIN"
 fi
-#if type -a busybox >& /dev/null;then
-#  PROMPT_COMMAND=""
-#fi
+
+if [ -d "$HOME/.local/go" ]; then
+  export GOPATH="$HOME/.local/go"
+  export PATH="$HOME/.local/go/bin:$PATH"
+fi
 
 if [ -f "$HOME/.peco-anyenv/peco-anyenv.sh" ]; then
   source "$HOME/.peco-anyenv/peco-anyenv.sh"

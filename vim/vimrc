@@ -305,20 +305,21 @@ endif
 
 " Powerline and lightline "{{{
 if !s:is_windows
-    if has('python3')
+    let s:powerline3path = '/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim'
+    let s:powerlinepath = '/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim'
+    if has('python3') && isdirectory(s:powerline3path)
         python3 from powerline.vim import setup as powerline_setup
         python3 powerline_setup()
         python3 del powerline_setup
-        set runtimepath+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim
+        set runtimepath+=expand(s:powerline3path)
         set laststatus=2 " Always display the statusline in all windows
         set showtabline=2 " Always display the tabline, even if there is only one tab
         set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-    endif
-    if has('python')
+    elseif has('python') && isdirectory(s:powerlinepath)
         python from powerline.vim import setup as powerline_setup
         python powerline_setup()
         python del powerline_setup
-        set runtimepath+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+        set runtimepath+=expand(s:powerlinepath)
         set laststatus=2 " Always display the statusline in all windows
         set showtabline=2 " Always display the tabline, even if there is only one tab
         set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)

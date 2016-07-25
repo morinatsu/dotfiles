@@ -9,7 +9,7 @@
     "max-kanji-continuous-len": true,
     "prh": {
       "rulePaths": [
-        "./prh.yml"
+        "~/dotfiles/prh.yml"
       ]
     }
   }

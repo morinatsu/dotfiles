@@ -6,3 +6,4 @@ vim/vimrc_cred
 byobu/.ssh-agent
 vim/yankround/
 vim/dein/
+byobu/tmux/plugins/*

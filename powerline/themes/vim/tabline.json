@@ -1,5 +1,4 @@
-{
-	"default_module": "powerline.segments.vim",
+{ "default_module": "powerline.segments.vim",
 	"segments": {
 		"left": [
 			{
@@ -75,7 +74,6 @@
 		],
 		"right": [
 			{
-				"type": "function",
 				"name": "cwd",
 				"function": "powerline.segments.common.env.cwd"
 			}

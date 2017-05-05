@@ -138,6 +138,7 @@ fi
 export BYOBU_BACKEND=tmux
 
 # powerline
+export PATH=$PATH:~/.local/bin
 if [ -d "/usr/local/lib/python2.7/dist-packages/powerline/" ]; then
     POWERLINE_ROOT="/usr/local/lib/python2.7/dist-packages/powerline/"
 fi
@@ -149,14 +150,13 @@ if [ -d "$HOME/.local/lib/python3.5/site-packages/powerline/" ]; then
 fi
 
 if [ -d "$POWERLINE_ROOT" ]; then
-    if [ -e $HOME/.local/bin/powerline-daemon ]; then
-        export PATH=$PATH:~/.local/bin
-	$HOME/.local/bin/powerline-daemon -q
-    else
-	if [ -e /usr/local/bin/powerline-daemon ]; then
-	    /usr/local/bin/powerline-daemon -q
-	fi
-    fi
+#    if [ -e $HOME/.local/bin/powerline-daemon ]; then
+#	$HOME/.local/bin/powerline-daemon -q
+#    else
+#	if [ -e /usr/local/bin/powerline-daemon ]; then
+#	    /usr/local/bin/powerline-daemon -q
+#	fi
+#    fi
     POWERLINE_BASH_CONTINUATION=1
     POWERLINE_BASH_SELECT=1
     . $POWERLINE_ROOT/bindings/bash/powerline.sh

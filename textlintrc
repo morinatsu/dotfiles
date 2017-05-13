@@ -11,6 +11,8 @@
       "rulePaths": [
         "~/dotfiles/prh.yml"
       ]
-    }
+    },
+    "period-in-list-item": true,
+    "ja-unnatural-alphabet": true
   }
 }

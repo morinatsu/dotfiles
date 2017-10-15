@@ -181,6 +181,7 @@ call dein#add('sjl/gundo.vim')
 call dein#add('haya14busa/incsearch.vim')
 call dein#add('kana/vim-vspec')
 call dein#add('Yggdroot/indentLine')
+call dein#add('gabrielelana/vim-markdown')
 call dein#end()
 
 filetype plugin on

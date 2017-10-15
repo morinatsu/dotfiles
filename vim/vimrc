@@ -91,6 +91,9 @@ if has('vim_starting')
 endif
 "}}}
 
+" ensure python3
+set pythonthreedll=python36.dll
+
 " Shougo/dein.vim: "{{{
 filetype off
 let g:neobundle_default_git_protocol='git'
@@ -124,7 +127,7 @@ endif
 "}}}
 
 " Shogo/unite.vim and sources "{{{
-call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/unite-help')
 call dein#add('Shougo/unite-outline')
 call dein#add('tsukkee/unite-tag')

@@ -92,7 +92,9 @@ endif
 "}}}
 
 " ensure python3
-set pythonthreedll=python36.dll
+if s:is_windows
+    set pythonthreedll=python36.dll
+endif
 
 " Shougo/dein.vim: "{{{
 filetype off

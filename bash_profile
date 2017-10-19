@@ -10,8 +10,10 @@
 # Written by John Zaitseff and released into the public domain.
 
 export PATH="/home/morinatsu/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -d "$HOME/.pyenv/" ]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 test -r ~/.bashrc && . ~/.bashrc
 

@@ -106,6 +106,7 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
 # setup pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
@@ -172,8 +173,6 @@ function _peco_ggi_list () {
 }
 alias ggi=_peco_ggi_list
 
-export PATH=~/.local/bin:$PATH
-
 function peco-hist() {
     time_column=`echo $HISTTIMEFORMAT | awk '{printf("%s",NF)}'`
     column=`expr $time_column + 3`
@@ -202,4 +201,7 @@ if [ -f "$HOME/.peco-anyenv/peco-anyenv.sh" ]; then
   source "$HOME/.peco-anyenv/peco-anyenv.sh"
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# $PATH operate
+path_append ()  { path_remove $1; export PATH="$PATH:$1"; }
+path_prepend () { path_remove $1; export PATH="$1:$PATH"; }
+path_remove ()  { export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; }

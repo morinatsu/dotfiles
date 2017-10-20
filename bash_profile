@@ -9,6 +9,12 @@
 #
 # Written by John Zaitseff and released into the public domain.
 
+# local binary directories
+export PATH=~/.local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# init pyenv
 export PATH="/home/morinatsu/.pyenv/bin:$PATH"
 if [ -d "$HOME/.pyenv/" ]; then
     eval "$(pyenv init -)"

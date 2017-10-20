@@ -170,9 +170,7 @@ call dein#add('chrisbra/Recover.vim')
 call dein#add('thinca/vim-zenspace')
 call dein#add('thinca/vim-quickrun')
 call dein#add('vim-scripts/HybridText')
-call dein#add('osyo-manga/vim-reanimate')
 call dein#add('easymotion/vim-easymotion')
-call dein#add('osyo-manga/vim-over')
 call dein#add('airblade/vim-rooter')
 call dein#add('tpope/vim-abolish')
 call dein#add('thinca/vim-fontzoom')
@@ -436,12 +434,6 @@ nnoremap <F7> :GundoToggle<CR>
 if has('python3')
     let g:gundo_prefer_python3 = 1
 endif
-
-" vim-howdoi
-map <Space>h <Plug>Howdoi
-
-" vim-reanimate
-let g:reanimate_save_dir = $HOME . '/.local/reanimate/save_dir'
 
 " incsearch.vim
 map /  <Plug>(incsearch-forward)

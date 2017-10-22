@@ -10,7 +10,7 @@ GVIMRC := gvimrc
 UNDODIR := .local/undodir
 endif
 
-install: install-bash install-vim install-powerline install-byobu install-textlint
+install: install-bash install-vim install-powerline install-byobu install-textlint install-tmux
 install-bash:
 	rm -f ~/.bashrc
 	ln -s `pwd`/bashrc ~/.bashrc
@@ -45,3 +45,8 @@ install-textlint:
 	rm -f ~/.textlintrc
 	ln -s `pwd`/textlintrc ~/.textlintrc
 
+install-tmux:
+	rm -rf ~/.tmux
+	rm -f ~/.tmux.conf
+	ln -s `pwd`/tmux ~/.tmux
+	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf

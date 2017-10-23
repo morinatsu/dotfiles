@@ -192,6 +192,10 @@ if [[ "$OSTYPE" =~ cygwin ]];then
   export CYGWIN="winsymlinks $CYGWIN"
 fi
 
+if [ -d "$HOME/node_modules/.bin" ]; then
+  export PATH="$HOME/node_modules/.bin:$PATH"
+fi
+
 if [ -d "$HOME/.local/go" ]; then
   export GOPATH="$HOME/.local/go"
   export PATH="$HOME/.local/go/bin:$PATH"

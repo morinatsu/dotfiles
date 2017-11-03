@@ -157,7 +157,7 @@ call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Konfekt/FastFold')
 
 call dein#add('vim-jp/vital.vim')
-call dein#add('vim-jp/vimdoc-ja')
+call dein#add('vim-jp/vimdoc-ja', {'timeout': 240})
 call dein#add('vim-scripts/sudo.vim')
 if s:is_windows
     call dein#add('itchyny/lightline.vim')

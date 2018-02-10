@@ -61,3 +61,5 @@ export TTC_CONSUMER_KEY='...'
 export TTC_CONSUMER_SECRET='...'
 export TTC_ACCESS_TOKEN='...'
 export TTC_ACCESS_TOKEN_SECRET='...'
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"

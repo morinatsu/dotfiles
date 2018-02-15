@@ -423,6 +423,7 @@ augroup ale_group
 
         let g:ale_linters = {
         \   'javascript': ['eslint'],
+        \   'php': ['phpcs'],
         \   'python': ['pylint'],
         \   'vimscript': ['vint'],
         \}

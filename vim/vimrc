@@ -49,35 +49,35 @@ set showtabline=2
 set guioptions-=e
 function! s:tabpage_label(n)
     " tabpage has title
-    let title = gettabvar(a:n, 'title')
-    if title !=# ''
-        return title
+    let l:title = gettabvar(a:n, 'title')
+    if l:title !=# ''
+        return l:title
     endif
     " highlight Selected tabpage
-    let bufnrs = tabpagebuflist(a:n)
-    let hi = a:n is tabpagenr() ? '%#TabLineSel#' : ' %#TabLine#'
+    let l:bufnrs = tabpagebuflist(a:n)
+    let l:hi = a:n is tabpagenr() ? '%#TabLineSel#' : ' %#TabLine#'
     " number of buffers
-    let no = len(bufnrs)
-    if no is 1
-	let no = ''
+    let l:no = len(l:bufnrs)
+    if l:no is 1
+	let l:no = ''
     endif
     " modified buffer
-    let mod = len(filter(copy(bufnrs), 'getbufvar(v:val,  "&modified")')) ? '+' : ''
-    let sp = (no . mod) ==# '' ? '' : ' '
+    let l:mod = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '+' : ''
+    let l:sp = (l:no . l:mod) ==# '' ? '' : ' '
     " filename of current buffer
-    let curbufnr = bufnrs[tabpagewinnr(a:n) - 1]
-    let fname = pathshorten(bufname(curbufnr))
+    let l:curbufnr = l:bufnrs[tabpagewinnr(a:n) - 1]
+    let l:fname = pathshorten(bufname(l:curbufnr))
     " return label
-    let label = no . mod . sp . fname
-    return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
+    let l:label = l:no . l:mod . l:sp . l:fname
+    return '%' . a:n . 'T' . l:hi . l:label . '%T%#TabLineFill#'
 endfunction
 function! MakeTabLine()
-    let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
-    let sep = ' | '
-    let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
-    let info = ''
-    let info .= fnamemodify(getcwd(), ':~') . ' '
-    return tabpages . '%=' . info
+    let l:titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
+    let l:sep = ' | '
+    let l:tabpages = join(l:titles, l:sep) . l:sep . '%#TabLineFill#%T'
+    let l:info = ''
+    let l:info .= fnamemodify(getcwd(), ':~') . ' '
+    return l:tabpages . '%=' . l:info
 endfunction
 set tabline=%!MakeTabLine()
 "}}}

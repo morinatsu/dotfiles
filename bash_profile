@@ -21,6 +21,12 @@ if [ -d "$HOME/.pyenv/" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+# init anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+if [ -d "$HOME/.anyenv" ]; then
+    eval "$(anyenv init -)"
+fi
+
 test -r ~/.bashrc && . ~/.bashrc
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -61,5 +67,3 @@ export TTC_CONSUMER_KEY='...'
 export TTC_CONSUMER_SECRET='...'
 export TTC_ACCESS_TOKEN='...'
 export TTC_ACCESS_TOKEN_SECRET='...'
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"

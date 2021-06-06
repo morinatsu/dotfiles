@@ -39,7 +39,7 @@ install-vim:
 	sh ./installer.sh `pwd`/vim/dein
 	rm -f ./installer.sh
 	rm -rf ~/$(UNDODIR)
-	mkdir ~/$(UNDODIR)
+	mkdir -p ~/$(UNDODIR)
 
 install-textlint:
 	rm -f ~/.textlintrc

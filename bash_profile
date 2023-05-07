@@ -15,10 +15,10 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # init pyenv
-export PATH="/home/morinatsu/.pyenv/bin:$PATH"
 if [ -d "$HOME/.pyenv/" ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
 fi
 
 # init anyenv
@@ -67,3 +67,4 @@ export TTC_CONSUMER_KEY='...'
 export TTC_CONSUMER_SECRET='...'
 export TTC_ACCESS_TOKEN='...'
 export TTC_ACCESS_TOKEN_SECRET='...'
+. "$HOME/.cargo/env"

@@ -108,24 +108,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# setup pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
-fi
-# virtualenvwrapper
-export VIRTUALENV_USE_DISTRIBUTE=true
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
 
-# google app engine
-if [ -d ~/google_appengine ]; then
-    PATH=$PATH:~/google_appengine
-    export PATH
-fi
 
 # remake vimrc
 if [ -f ~/.vimrc ]; then
@@ -133,36 +116,7 @@ if [ -f ~/.vimrc ]; then
     ln -s ~/dotfiles/vim/vimrc ~/.vimrc
 fi
 
-# pythonz
-[[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-
-# set tmux to byobu-backend
-export BYOBU_BACKEND=tmux
-
-# powerline
 export PATH=$PATH:~/.local/bin
-if [ -d "/usr/local/lib/python2.7/dist-packages/powerline/" ]; then
-    POWERLINE_ROOT="/usr/local/lib/python2.7/dist-packages/powerline/"
-fi
-if [ -d "/usr/local/lib/python3.5/dist-packages/powerline/" ]; then
-    POWERLINE_ROOT="/usr/local/lib/python3.5/dist-packages/powerline/"
-fi
-if [ -d "$HOME/.local/lib/python3.5/site-packages/powerline/" ]; then
-    POWERLINE_ROOT="$HOME/.local/lib/python3.5/site-packages/powerline/"
-fi
-
-if [ -d "$POWERLINE_ROOT" ]; then
-#    if [ -e $HOME/.local/bin/powerline-daemon ]; then
-#	$HOME/.local/bin/powerline-daemon -q
-#    else
-#	if [ -e /usr/local/bin/powerline-daemon ]; then
-#	    /usr/local/bin/powerline-daemon -q
-#	fi
-#    fi
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    . $POWERLINE_ROOT/bindings/bash/powerline.sh
-fi
 
 # for get-git-ignore
 function _peco_ggi_list () {

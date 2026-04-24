@@ -14,12 +14,7 @@ export PATH=~/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# init pyenv
-if [ -d "$HOME/.pyenv/" ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
+
 
 # init anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"

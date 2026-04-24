@@ -110,11 +110,7 @@ fi
 
 
 
-# remake vimrc
-if [ -f ~/.vimrc ]; then
-    rm ~/.vimrc
-    ln -s ~/dotfiles/vim/vimrc ~/.vimrc
-fi
+
 
 export PATH=$PATH:~/.local/bin
 

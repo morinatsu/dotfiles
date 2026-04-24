@@ -1,12 +1,10 @@
-#bash_aliases
+# ~/.bash_aliases
+# Add your custom aliases here.
 
-# less.sh
-if [ -f /usr/local/share/vim/vim74/macros/less.sh ]; then
-    alias less.sh='/usr/local/share/vim/vim74/macros/less.sh'
-fi
-if [ -f /usr/share/vim/vim74/macros/less.sh ]; then
-    alias less.sh='/usr/share/vim/vim74/macros/less.sh'
-fi
+# 安全対策（上書き・削除前に確認プロンプトを出す）
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 
-# ctags
-alias ctags='ctags -f .tags'
+# パスを見やすく表示する
+alias path='echo -e ${PATH//:/\\n}'

@@ -202,6 +202,10 @@ if [ -d "$HOME/.local/go" ]; then
   export PATH="$HOME/.local/go/bin:$PATH"
 fi
 
+if command -v go >/dev/null 2>&1; then
+  export PATH="$(go env GOPATH)/bin:$PATH"
+fi
+
 if [ -f "$HOME/.peco-anyenv/peco-anyenv.sh" ]; then
   source "$HOME/.peco-anyenv/peco-anyenv.sh"
 fi
@@ -216,9 +220,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . "$HOME/.cargo/env"
 
-# pyenv
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
+export COLORTERM=truecolor
